@@ -3,11 +3,11 @@ angular.module('triangulate.setup', [])
 	debug: 			false,
 	
 	// urls where your app (url), api and sites folder are publicly available
-	url: 			'https://app.triangulate.io',
-	api: 			'https://app.triangulate.io/api',
-	sites: 			'http://sites.triangulate.io',
-	site:			'http://{{friendlyId}}.triangulatecloud.com',
-	terms:			'http://triangulate.io/page/terms-of-service',
+	url: 			'http://app.mytriangulate.com',
+	api: 			'http://app.mytriangulate.com/api',
+	sites: 			'http://sites.mytriangulate.com',
+	site:			'http://{{friendlyId}}.mytriangulatesites.com',
+	terms:			'http://mytriangulate.com/page/terms-of-service',
 	
 	// default theme
 	themeId: 		'simple',
@@ -21,7 +21,7 @@ angular.module('triangulate.setup', [])
 	language: 		'en',
 
 	// public keys
-	stripePubKey:	'pk_live_YJQDzjalfdjT2ujVr5U9Z44O',
+	stripePubKey:	'',
 	
 	// pascode used by create (must match value set in API)
 	passcode: 		'',
@@ -33,6 +33,6 @@ angular.module('triangulate.setup', [])
 	email:			'matt@matthewsmith.com',
 	
 	//links
-	pricingLink:	'http://triangulate.io/page/pricing'
+	pricingLink:	'http://mytriangulate.com/page/pricing'
 	
 });
