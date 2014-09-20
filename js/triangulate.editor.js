@@ -284,7 +284,7 @@ triangulate.editor.parseHTML = function(){
 			  			response += html;
 			  		}
 			  		catch(e){
-				  		console.log('[triangulate.Editior.error] could not execute the parse method on the plugin');
+				  		console.log('[triangulate.Editor.error] could not execute the parse method on the plugin');
 			  		}
 		  		}
 		 

@@ -323,6 +323,7 @@ var utilities = {
 		
 		// error checking
 		if(arr == null || arr == undefined){
+			console.log('[triangulate.utilities.error] getIndexByAttribute was null or undefined');
 			return -1;
 		}
 		

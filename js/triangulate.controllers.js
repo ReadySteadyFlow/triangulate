@@ -1,7 +1,7 @@
 angular.module('triangulate.controllers', [])
 
 // login controller
-.controller('LoginCtrl', function($scope, $window, $stateParams, $rootScope, $i18next, Setup, User, Site, Editor) {
+.controller('LoginCtrl', function($scope, $window, $state, $stateParams, $rootScope, $i18next, Setup, User, Site, Editor) {
 	
 	$rootScope.template = 'login';
 	
@@ -36,7 +36,7 @@ angular.module('triangulate.controllers', [])
 					$window.sessionStorage.user = JSON.stringify(data.user);
 					
 					// set start
-					var start = data.start;
+					$state.go(data.start);
 					
 					// retrieve site
 					Site.retrieve(function(data){
@@ -46,9 +46,6 @@ angular.module('triangulate.controllers', [])
 						// set site in $rootScope, session
 						$rootScope.site = data;
 						$window.sessionStorage.site = JSON.stringify(data);
-						
-						// go to start URL
-						location.href = start;
 							
 					});
 					
