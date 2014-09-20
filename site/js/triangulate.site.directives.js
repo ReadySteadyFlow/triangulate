@@ -1103,4 +1103,26 @@ angular.module('triangulate.site.directives', [])
 	
 })
 
+// tabset
+.directive('triangulateShowtab', function($rootScope, Form){
+	
+	return{
+		
+		restrict: 'A',
+		link: function(scope, element, attr){
+					
+			element.on('click', function(e) {
+                e.preventDefault();
+                $(element).tab('show');
+            });
+			
+		}
+		
+			
+		
+	}
+	
+})
+
+
 ;

@@ -1081,6 +1081,24 @@
 		margin-right: 5px;
 	}
 	
+	/* tabs */
+	.editor .nav-tabs>li{
+		padding: 0 !important;
+	}
+	
+	.editor .nav-tabs>li>a{
+		outline: none;
+		cursor: text;
+	}
+	
+	.editor .nav>li>a:focus{
+		outline: none;
+	}
+	
+	.editor .nav-tabs{
+		margin: 0 0 10px 0;
+	}
+	
 	/* table */
 	.editor .block div.triangulate-table{
 		padding: 8px 0 20px 0 !important;
@@ -1097,6 +1115,9 @@
 		min-width: 50%;
 		margin-bottom: 2px !important;
 		margin-top: 0 !important;
+		margin-left: 0;
+		margin-right: 0;
+		width: 100%;
 	}
 	
 	.editor div.triangulate-table table.col-2 td{

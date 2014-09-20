@@ -1343,4 +1343,176 @@ triangulate.component.video = {
 
 triangulate.component.video.init();
 
+// tabset element
+triangulate.component.tabset = {
+
+	// initialize tabset
+	init:function(){
+	
+		// handle column change
+		$(document).on('change', '.config[data-action="triangulate.component.tabset"] [name="tabs"]', function(){
+			
+			var node = $(triangulate.editor.currNode);
+			var form = $('.config[data-action="triangulate.component.tabset"]');
+			
+			var tabs = $(form).find('input[name=tabs]').val();
+			var curr_tabs = $(node).find('.nav-tabs li').length;
+			var nav = $(node).find('.nav-tabs');
+			
+			// update columns
+            if(tabs > curr_tabs){ // add columns
+	            
+	            var toBeAdded = tabs - curr_tabs;
+	            
+	            for(x=0; x<toBeAdded; x++){
+		            $(nav).append('<li class="triangulate-element"><a contentEditable="true">Tab</a></li>');
+	            }
+				
+	            
+            }
+            else if(tabs < curr_tabs){ // remove columns
+            
+            	var toBeRemoved = curr_tabs - tabs;
+            	
+				for(var x=0; x<toBeRemoved; x++){
+					$(nav).find('li').last().remove();
+				}
+		
+            }
+
+		});
+		
+	},
+
+	// creates tabset
+	create:function(){
+	
+		// generate uniqId
+		var id = triangulate.editor.generateUniqId('tabset', 'tabset');
+		
+		// build html
+		var html = triangulate.editor.defaults.elementMenu +
+					'<ul class="nav nav-tabs" role="tablist">' +
+					  '<li class="active triangulate-element"><a contentEditable="true">Tab</a></li>' +
+					  '<li class="triangulate-element"><a contentEditable="true">Tab</a></li>' +
+					  '<li class="triangulate-element"><a contentEditable="true">Tab</a></li>' +
+					'</ul>';			
+					
+					
+		// tag attributes
+		var attrs = [];
+		attrs['id'] = id;
+		attrs['data-id'] = id;
+		attrs['class'] = 'triangulate-tabset';
+		attrs['data-cssclass'] = '';
+		attrs['data-tabs'] = '3';
+		
+		// append element to the editor
+		triangulate.editor.append(
+			 utilities.element('div', attrs, html)
+		);
+		
+		// setup paste filter
+		$('#'+id+' [contentEditable=true]').paste();
+		
+		return true;
+		
+	},
+	
+	// parse tabset
+	parse:function(node){
+	
+		// build html
+		var html = triangulate.editor.defaults.elementMenu +
+					'<ul class="nav nav-tabs" role="tablist">';
+				
+		// parse links				
+		var lis = $(node).find('li');			
+					
+		for(y=0; y<lis.length; y++){
+		
+			// tag attributes
+			var attrs = [];
+			
+			if(y == 0){
+				attrs['class'] = 'active triangulate-element';
+			}
+			else{
+				attrs['class'] = 'triangulate-element';
+			}
+			
+			attrs['data-id'] = $(lis[y]).attr('id');
+			attrs['data-target'] = $(lis[y]).attr('target');
+			
+			var text = $(lis[y]).find('a').text();
+			var link = '<a contentEditable="true">' + text + '</a>';
+			
+			// return element
+			html += utilities.element('li', attrs, link);
+		}
+		
+		html += '</ul>';
+		
+		// get params
+		var id = $(node).attr('id');
+		
+		// tag attributes
+		var attrs = [];
+		attrs['id'] = id;
+		attrs['data-id'] = id;
+		attrs['class'] = 'triangulate-tabset';
+		attrs['data-cssclass'] = $(node).attr('class');
+		attrs['data-tabs'] = lis.length;
+		
+		// return element
+		return utilities.element('div', attrs, html);
+				
+	},
+	
+	// generate tabset
+	generate:function(node){
+	
+  		// html for tag
+  		var html = '<ul class="nav nav-tabs" role="tablist">';
+  		
+  		// get lis
+  		var lis = $(node).find('li');
+  		
+  		for(var y=0; y<lis.length; y++){
+  		
+			// tag attributes
+			var attrs = [];
+			attrs['id'] = $(lis[y]).attr('data-id');
+			
+			if(y == 0){
+				attrs['class'] = 'active';
+			}
+			
+			var target = $(lis[y]).attr('data-target');
+			
+			attrs['target'] = target;
+			
+			var text = $(lis[y]).find('a').text();
+			var link = '<a data-target="' + target + '" role="tab" data-toggle="tab" triangulate-showtab>' + text + '</a>';
+		
+			// create li
+			html += utilities.element('li', attrs, link, true);
+			
+	  	}
+	  	
+	  	html += '</ul>';
+	  	
+		// tag attributes
+		var attrs = [];
+		attrs['id'] = $(node).attr('data-id');
+		attrs['class'] = $(node).attr('data-cssclass');
+		
+		// return element
+		return utilities.element('triangulate-tabset', attrs, html);
+	}
+	
+};
+
+triangulate.component.tabset.init();
+
 

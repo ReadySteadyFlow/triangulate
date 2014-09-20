@@ -81,6 +81,15 @@
 		"config":	"plugins/element/config/list.html"
 	},
 	{
+		"action":	"triangulate.component.tabset",
+		"tag":		"TRIANGULATE-TABSET",
+		"title":	"Tabs",
+		"class":	"triangulate-tabset",
+		"icon": 	"fa fa-folder draggable",
+		"text":		"",
+		"config":	"plugins/component/config/tabs.html"
+	},
+	{
 		"action":	"triangulate.element.table",
 		"tag":		"TABLE",
 		"title":	"Table",
