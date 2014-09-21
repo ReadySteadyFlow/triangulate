@@ -1368,7 +1368,7 @@ angular.module('triangulate.factories', [])
 	}
 	
 	// publishes a stylesheet
-	stylesheet.publish = function(name, content, callback){
+	stylesheet.publish = function(name, content, successCallback, failureCallback){
 		
 		// set params
 		var params = {
@@ -1380,7 +1380,8 @@ angular.module('triangulate.factories', [])
 	
 		// post to API
 		$http.post(Setup.api + '/stylesheet/publish', $.param(params))
-			.success(callback);
+			.success(successCallback)
+			.error(failureCallback);
 	}
 	
 	// removes a stylesheet

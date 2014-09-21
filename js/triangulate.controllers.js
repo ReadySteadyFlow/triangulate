@@ -1735,6 +1735,8 @@ angular.module('triangulate.controllers', [])
 	$scope.loading = true;
 	$scope.content = '';
 	
+	$scope.showError = false;
+	
 	// set code mirror options
 	$scope.editorOptions = {
         lineWrapping : true,
@@ -1818,6 +1820,9 @@ angular.module('triangulate.controllers', [])
 		
 		Stylesheet.publish($scope.name, $scope.content, function(){
 			message.showMessage('success');
+			$scope.showError = false;
+		}, function(){
+			$scope.showError = true;
 		});
 		
 	}

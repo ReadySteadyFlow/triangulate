@@ -176,6 +176,7 @@
   "Indicators": "Indicators",
   "Insert HTML": "Insert HTML",
   "Interval": "Interval",
+  "invalid_stylesheet": "The stylesheet appears to be invalid. Update it and republish.",
   "invalid_json": "The JSON appears to be invalid. Update it and republish.",
   "Italic": "Italic",
   "Item": "Item",
