@@ -6,7 +6,25 @@
         <h1>{{'Settings' | i18next}}</h1>
     </nav>
     <!-- /nav -->
+    
+    <menu>
+    
+    	<div class="dropdown">
+		  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+		    <span id="settings-text">{{'Site' | i18next}}</span>
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu dropdown-auto" role="menu" aria-labelledby="page-types" data-display="#settings-text">
+	  		<li class="active" data-target="#section-site"><a>{{'Site' | i18next}}</a></li>
+			<li data-target="#section-display"><a>{{'Display' | i18next}}</a></li>
+			<li data-target="#section-payments"><a>{{'Payments' | i18next}}</a></li>
+			<li data-target="#section-email"><a>{{'Email' | i18next}}</a></li>
+			<li data-target="#section-advanced"><a>{{'Advanced' | i18next}}</a></li>
+		  </ul>
+		</div>
+    </menu>
    
+   <!--
 	<ul class="segmented-control">
 		<li class="active" data-target="#section-site"><a>{{'Site' | i18next}}</a></li>
 		<li data-target="#section-display"><a>{{'Display' | i18next}}</a></li>
@@ -14,7 +32,7 @@
 		<li data-target="#section-email"><a>{{'Email' | i18next}}</a></li>
 		<li data-target="#section-advanced"><a>{{'Advanced' | i18next}}</a></li>
 	</ul>
-	<!-- /.segmented-control -->
+	 /.segmented-control -->
 	
 	<form id="form-vertical">
 	

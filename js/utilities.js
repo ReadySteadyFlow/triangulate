@@ -35,6 +35,37 @@ var utilities = {
 	        $(target).removeClass('hidden');
 	        $(this).addClass('active');
         });
+
+		// segmented control
+        $(document).on('click', '.dropdown-auto li', function(){
+        
+        	// hide other segements
+			var lis = $(this).parents('.dropdown-auto').find('li');
+			
+			for(x=0; x<lis.length; x++){
+				var target = $(lis[x]).attr('data-target');
+				
+				$(target).addClass('hidden');
+				$(lis[x]).removeClass('active');
+			}
+        
+			// show current segment
+	        var target = $(this).attr('data-target');
+	        
+	        $(target).removeClass('hidden');
+	        $(this).addClass('active');
+	        
+	        // get text
+	        var text = $(this).find('a').text();
+	        
+	        var display = $(this).parents('.dropdown-auto').attr('data-display');
+	        
+	        if(display != undefined){
+		        $(display).text(text);
+	        }
+        });
+
+
         
         // set current page in menu
         var currpage = $('body').data('currpage');
