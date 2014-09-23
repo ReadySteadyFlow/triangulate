@@ -446,6 +446,9 @@ triangulate.editor.setupMenuEvents = function(){
 	    
     });
     
+	// clear existing text events
+	$(document).unbind('mousedown touchstart');
+   
     // setup text events
 	$(document).on('mousedown touchstart', '.context-menu a', function(e){
 		var action = $(this).attr('data-action') + '.create';
