@@ -233,6 +233,11 @@ body textarea.form-control{
 	}
 
 /* modals */
+body .modal menu{
+	margin-top: -10px !important;
+	padding: 0 15px !important;
+}
+
 body .modal-header{
 	padding-top: 10px;
 	padding-bottom: 10px;	
@@ -1004,7 +1009,7 @@ div.select{
   height: 150px;
   margin: 0;
   border: 1px solid #ccc !important;
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 	div.select.select-lg{

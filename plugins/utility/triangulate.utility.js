@@ -6,6 +6,8 @@ triangulate.utility = triangulate.utility || {};
 triangulate.utility.load = {
 
 	pageId: null,
+	versionId: null,
+	location: null,
 
 	// init
 	init:function(){
@@ -16,6 +18,15 @@ triangulate.utility.load = {
 			triangulate.utility.load.pageId = pageId;
 
 			$('#selectPage li').removeClass('selected');
+			$(this).addClass('selected');
+		});
+		
+		$(document).on('click', '#selectVersion li', function(){
+			var versionId = $(this).attr('data-version');
+
+			triangulate.utility.load.versionId = versionId;
+
+			$('#selectVersion li').removeClass('selected');
 			$(this).addClass('selected');
 		});
 		
@@ -85,6 +96,34 @@ triangulate.utility.load = {
 
 		});
 		
+		$(document).on('click', '#loadLayoutFromVersion', function(){
+
+			if(triangulate.utility.load.versionId==null){
+				message.showMessage('error');
+				return;
+			}
+
+			$.ajax({
+				url: triangulate.editor.api + '/version/retrieve',
+				type: 'post',
+				beforeSend : function(xhr) {
+				 	xhr.setRequestHeader('Authorization', 'Bearer ' + window.sessionStorage.token);
+			    },
+				data: {versionId: triangulate.utility.load.versionId},
+				success: function(data){
+				
+					// update editor
+					$(triangulate.editor.el).html(data.Content);
+					
+					// create editor
+	    			triangulate.editor.refresh();
+
+					$('#loadLayoutDialog').modal('hide');
+				}
+			});
+
+		});
+		
 		$(document).on('click', '#loadLayoutFromCode', function(){
 		
 			var data = $('#load-code').val();
@@ -119,6 +158,7 @@ triangulate.utility.load = {
 		
 		scope.retrievePages();
 		scope.retrievePagesForTheme();
+		scope.retrieveVersions();
 		
 	
 		// show the dialog

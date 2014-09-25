@@ -16,6 +16,13 @@ angular.module('triangulate.filters', [])
 	}
 })
 
+.filter('prettyDate', function() {
+    return function(text) {
+    	var st = moment.utc(text, 'YYYY-MM-DD HH:mm:ss');
+		return st.format('MMM Do YYYY, h:mm:ss a');
+	}
+})
+
 .filter('daysLeft', function() {
     return function(text) {
     

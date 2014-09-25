@@ -477,7 +477,6 @@ body.content{}
 	
 	/* load layout dialog */
 	body.content #load-code{
-		border-radius: 10px;
 		border-color: #ccc;
 		width: 100%;
 		height: 350px;

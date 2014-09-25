@@ -13,13 +13,22 @@
 			</div>
 			<!-- /.modal-header -->
 			
-			<ul class="segmented-control count-3">
-				<li class="active" data-target=".load-existing"><a>{{'Existing Page' | i18next}}</a></li>
-				<li data-target=".load-theme"><a>{{'From Theme' | i18next}}</a></li>
-				<li data-target=".load-code"><a>{{'From Code' | i18next}}</a></li>
-			</ul>
-			<!-- /.segmented-control -->
-
+			<menu>
+    
+		    	<div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+				    <span id="load-text">{{'Existing Page' | i18next}}</span>
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu dropdown-auto" role="menu" aria-labelledby="page-types" data-display="#load-text">
+			  		<li class="active" data-target=".load-existing"><a>{{'Existing Page' | i18next}}</a></li>
+					<li data-target=".load-theme"><a>{{'From Theme' | i18next}}</a></li>
+					<li data-target=".load-code"><a>{{'From Code' | i18next}}</a></li>
+					<li data-target=".load-version"><a>{{'From Version' | i18next}}</a></li>
+				  </ul>
+				</div>
+		    </menu>
+			
 			<div class="modal-body">
 			
 			<div class="load-existing">
@@ -47,6 +56,18 @@
 			</div>
 			<!-- #load-code -->
 			
+			<div class="load-version hidden">
+				<div id="selectVersion" class="select select-lg">
+					<ul>
+						<li ng-repeat="version in versions"
+							data-version="{{version.VersionId}}">
+							{{version.Created | prettyDate}} {{'by' | i18next}} {{version.FirstName}} {{version.LastName}}
+						</li>
+					</ul>
+				</div>    
+			</div>
+			<!-- #load-theme -->
+			
 			</div>
 			<!-- /.modal-body -->
 
@@ -55,6 +76,7 @@
 				<button id="loadLayout" class="load-existing primary-button" type="button">{{'Load Layout' | i18next}}</button>
 				<button id="loadLayoutFromTheme" class="load-theme primary-button hidden" type="button">{{'Load Layout' | i18next}}</button>
 				<button id="loadLayoutFromCode" class="load-code primary-button hidden" type="button">{{'Load Layout' | i18next}}</button>
+				<button id="loadLayoutFromVersion" class="load-version primary-button hidden" type="button">{{'Load Layout' | i18next}}</button>
 			</div>
 			<!-- /.modal-footer -->
 		

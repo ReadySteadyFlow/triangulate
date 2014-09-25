@@ -697,7 +697,7 @@ angular.module('triangulate.controllers', [])
 })
 
 // content controller
-.controller('ContentCtrl', function($scope, $rootScope, $stateParams, $sce, Setup, Site, Page, PageType, Image, Icon, Theme, Layout, Stylesheet, Editor, Translation, File) {
+.controller('ContentCtrl', function($scope, $rootScope, $stateParams, $sce, Setup, Site, Page, Version, PageType, Image, Icon, Theme, Layout, Stylesheet, Editor, Translation, File) {
 	
 	$rootScope.template = 'content';
 	
@@ -900,6 +900,9 @@ angular.module('triangulate.controllers', [])
 			$scope.page.HasDraft = false;
 		});
 		
+		// save a version of the content
+		Version.save($scope.pageId, content, function(){});
+		
 		// save settings for the page
 		$scope.saveSettings();
 		
@@ -1085,6 +1088,25 @@ angular.module('triangulate.controllers', [])
 				if(Setup.debug)console.log(data);
 				
 				$scope.themePages = data;
+			}
+			
+		});
+	
+	}	
+	
+	// retrieve versions for a page
+	$scope.retrieveVersions = function(){
+	
+		// list pages for theme
+		Version.list($scope.pageId, function(data){
+		
+			if($scope.versions == null){
+		
+				// debugging
+				if(Setup.debug)console.log('[triangulate.debug] Version.retrieveVersions');
+				if(Setup.debug)console.log(data);
+				
+				$scope.versions = data;
 			}
 			
 		});
