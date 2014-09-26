@@ -524,11 +524,8 @@ body.content{}
 	border-left: 1px solid #ddd;
 	background-color: #f8f8f8;
 	overflow: scroll;
+	padding-bottom: 100px;
 }
-
-	.content .context-body{
-		padding-bottom: 100px;
-	}
 
 	.content .context-menu.sticky{
 	    position: fixed;

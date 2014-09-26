@@ -282,29 +282,84 @@ angular.module('triangulate.site.directives', [])
 		
 			scope.site = $rootScope.site;
 		
-			// get inputs from attributes
-			var type = attr.type;
-			var pagesize = attr.pagesize;
-			var current = 0;
-			var orderby = attr.orderby;
-			var tag = attr.tag;
+			// set a nice default
+			scope.type = 'list-default';
+			
+			if(attr.type != undefined){
+				scope.type = attr.type;
+			}
+			
+			// set a nice defult
+			scope.pagesize = 10;
+			
+			if(attr.pagesize != undefined){
+				scope.pagesize = attr.pagesize;
+			}
+			
+			scope.current = 0;
+			
+			// set a nice defult
+			scope.orderby = 'Name';
+			
+			if(attr.orderby != undefined){
+				scope.orderby = attr.orderby;
+			}
+			
+			// set a nice default
+			var tag = '';
+			
+			if(attr.tag != undefined){
+				tag = attr.tag;
+			}
 			
 			scope.tag = tag;
 			
-			// list page
-			Page.list(type, pagesize, current, orderby, 
-				function(data){  // success
+			scope.pageResults = false;
 			
-					console.log('[triangulate.debug] Page.list');
-					console.log(data);
-					
-					scope.pages = data;
-					
-				},
-				function(){ // failure
-					
-					
-				});
+			if(attr.pageresults != undefined){
+				scope.pageResults = attr.pageresults;
+			}
+			
+			// update the list
+			var list = function(){
+		
+				// list page
+				Page.list(scope.type, scope.pagesize, scope.current, scope.orderby, 
+					function(data){  // success
+				
+						console.log('[triangulate.debug] Page.list');
+						console.log(data);
+						
+						scope.pages = data;
+						
+					},
+					function(){ // failure
+						
+						
+					});
+				
+			}
+			
+			// page
+			list();
+		
+			// page list
+			scope.next = function(){
+				
+				scope.current++;
+				
+				list();
+				
+			}
+			
+			// page previous
+			scope.previous = function(){
+				
+				scope.current--;
+				
+				list();
+				
+			}
 			
 		}
 		

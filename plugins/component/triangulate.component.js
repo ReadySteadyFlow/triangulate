@@ -740,10 +740,10 @@ triangulate.component.list = {
 		attrs['class'] = 'triangulate-list';
 		attrs['data-cssclass'] = '';
 		attrs['data-type'] = '';
-		attrs['data-display'] = '';
-		attrs['data-pagesize'] = '';
-		attrs['data-orderby'] = '';
-		attrs['data-pageresults'] = '';
+		attrs['data-display'] = 'list-default';
+		attrs['data-pagesize'] = '10';
+		attrs['data-orderby'] = 'Name';
+		attrs['data-pageresults'] = 'false';
 		attrs['data-tag'] = '';
 		attrs['data-desclength'] = '';
 		
