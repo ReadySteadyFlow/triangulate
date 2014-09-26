@@ -990,10 +990,14 @@ angular.module('triangulate.controllers', [])
 	
 	// set location
 	$scope.setLocation = function(){
-		
+	
 		var callback = function(latitude, longitude, fmtAddress){
-			$scope.page.Latitude = latitude;
-			$scope.page.Longitude = longitude;
+		
+			$scope.$apply(function(){
+				$scope.page.Latitude = latitude;
+				$scope.page.Longitude = longitude;
+			});
+			
 		}
 		
 		var address = $scope.page.Location;
