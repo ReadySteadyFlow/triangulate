@@ -7,19 +7,19 @@
     </nav>
     <!-- /nav -->
 
-    <div id="sitesList">
+    <div>
     
         <div class="listItem" ng-repeat="site in sites">
-        	<!--
+
     		<a class="remove"
     			ng-click="showRemoveSite(site)">
-                <i class="fa fa-minus"></i>
-            </a> -->
+				<i class="fa fa-minus"></i>
+            </a>
             
     		<h2>
     			<a ng-click="showEditSite(site)">{{site.Name}}</a>
     		</h2>
-    		<p><span class="domain"><a ng-href="{{site.Domain}}" target="_blank">{{site.Domain}}</a> <i class="fa fa-external-link"></i></span></p>
+    		<p><span class="domain"><a ng-href="{{site.Domain}}" target="_blank">{{site.Domain}}</a></span> <span class="domain">{{site.Bucket}}</span></p>
             <em>
             	<span class="status">{{site.Status}} 
             		<span ng-if="site.Status=='Trial'" class="days-left">({{site.Created | daysLeft}} {{'days left' | i18next}})</span>
@@ -124,6 +124,39 @@
 			<!-- /.modal-footer -->
 			
 			</form>
+			
+		</div>
+		<!-- /.modal-content -->
+		
+	</div>
+	<!-- /.modal-dialog -->
+
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="removeSiteDialog">
+
+	<div class="modal-dialog">
+	
+		<div class="modal-content">
+		
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">×</button>
+				<h3>{{'Remove Site' | i18next}}</h3>
+			</div>
+			<div class="modal-body">
+			
+			<p>
+				{{'Confirm you want to remove' | i18next}} <strong>{{temp.Name}}</strong>
+			</p>
+			
+			</div>
+			<div class="modal-footer">
+				<button class="secondary-button" data-dismiss="modal">{{'Close' | i18next}}</button>
+				<button class="primary-button"
+					ng-click="removeSite(temp)">{{'Remove' | i18next}}</button>
+			</div>
+			<!-- /.modal-footer -->
 			
 		</div>
 		<!-- /.modal-content -->

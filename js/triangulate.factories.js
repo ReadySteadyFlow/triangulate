@@ -263,6 +263,46 @@ angular.module('triangulate.factories', [])
 			.then(callback);
 	}
 	
+	// removes a site
+	site.remove = function(toBeRemoved, successCallback, failureCallback){
+		
+		// set params
+		var params = {
+			siteId: toBeRemoved.SiteId};
+			
+		// set post to URL Encoded
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+	
+		// post to API
+		$http.post(Setup.api + '/site/remove', $.param(params))
+			.then(function(res){
+				var i = site.getIndexById(toBeRemoved.SiteId);
+				if(i !== -1)site.data.splice(i, 1);
+				
+				return;
+			}, failureCallback)
+			.then(successCallback);
+		
+		// invalidate cache
+		site.invalidateCache();
+	}
+	
+	// get the index by id
+	site.getIndexById = function(id){
+	
+		var data = site.data;
+		
+		for(x=0; x<data.length; x++){
+			
+			if(data[x].SiteId == id){
+				return x;
+			}
+			
+		}
+		
+		return -1;
+	}
+	
 	return site;
 	
 })

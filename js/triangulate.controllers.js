@@ -154,7 +154,7 @@ angular.module('triangulate.controllers', [])
 	// temporary model
 	$scope.temp = {
 		'email': '',
-		'plan': 'triangulate-basic',
+		'plan': 'triangulate-starter',
 		'payWith': 'stripe',
 		'domain': ''
 	}
@@ -284,6 +284,31 @@ angular.module('triangulate.controllers', [])
 		});
 	
 		$('#siteDialog').modal('hide');
+	}
+	
+	// shows the remove site dialog
+	$scope.showRemoveSite = function(site){
+	
+		// set temporary model
+		$scope.temp = site;
+	
+		$('#removeSiteDialog').modal('show');
+	}
+	
+	// removes the site
+	$scope.removeSite = function(site){
+	
+		message.showMessage('progress');
+	
+		Site.remove(site, function(){
+			message.showMessage('success');
+			$('#removeSiteDialog').modal('hide');
+		}, function(){
+			message.showMessage('error');
+			$('#removeSiteDialog').modal('hide');
+		});
+	
+		
 	}
 	
 })

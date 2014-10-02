@@ -23,6 +23,8 @@
 							<input id="name" type="text" 
 								ng-model="name"
 								ng-focus="setStep(1)"
+								ng-minlength="3"
+								ng-maxlength="50"
 								data-id="{{friendlyId}}"
 								class="form-control" triangulate-validate-site-id triangulate-create-id="set" required>
 								
@@ -36,7 +38,9 @@
 					<div class="col-md-4">
 						<div class="form-group">
 							<label for="email">{{'Email' | i18next}}</label>
-							<input id="email" type="text"
+							<input id="email" type="email"
+								ng-minlength="3"
+								ng-maxlength="255"
 								ng-model="email"
 								ng-focus="setStep(1)"
 								class="form-control" required>
@@ -54,6 +58,8 @@
 						<div class="form-group">
 							<label for="password">{{'Password' | i18next}}</label>
 							<input id="password" type="password" 
+								ng-minlength="3"
+								ng-maxlength="255"
 								ng-model="password"
 								ng-focus="setStep(1)"
 								class="form-control" required>
