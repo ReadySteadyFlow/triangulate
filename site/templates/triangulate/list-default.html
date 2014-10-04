@@ -4,10 +4,11 @@
 		ng-repeat="page in pages | filter:tag">
 		<a class="pull-left thumbnail"
 			 ui-sref="{{page.Url}}"
+			 href="/{{page.Url}}"
 			 ng-show="page.HasImage">
 				 <img src="{{site.ImagesURL}}{{page.Thumb}}">
 		</a>
-		<h4><a ui-sref="{{page.Url}}">{{page.Name}}</a></h4>
+		<h4><a ui-sref="{{page.Url}}" href="/{{page.Url}}">{{page.Name}}</a></h4>
 		<h5 ng-show="page.Callout">{{page.Callout}}</h5>
 		<p>{{page.Description}}</p>
 	</li>

@@ -167,7 +167,7 @@ triangulate.text.link = {
 			
 			// external links should have http
 			if(url.indexOf('http') == -1){
-				html += '<a ui-sref="'+url+'"';
+				html += '<a ui-sref="'+url+'" href="'+url+'"';
 			}
 			else{
 				html += '<a href="'+url+'"';
