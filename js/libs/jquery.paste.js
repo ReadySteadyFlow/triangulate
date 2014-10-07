@@ -1,7 +1,7 @@
 (function($){  
 	$.fn.paste = function(){
 		
-		$(this).bind('paste', function(e){
+		$(this).on('paste', function(e){
 			
 			ph.curr = this;
 			

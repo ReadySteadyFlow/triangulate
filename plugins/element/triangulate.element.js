@@ -437,6 +437,9 @@ triangulate.element.p = {
 		attrs['class'] = 'triangulate-p';
 		attrs['data-cssclass'] = $(node).attr('class');
 		
+		// setup paste filter
+		$('#'+id+' [contentEditable=true]').paste();
+		
 		// return element
 		return utilities.element('div', attrs, html);
 				

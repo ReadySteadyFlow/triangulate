@@ -262,34 +262,33 @@ triangulate.editor.parseHTML = function(){
 	var top = triangulate.editor.el;
 
 	function parseModules(node){
-			var children = $(node).children();
-			var response = '';
-			
-			for(var x=0; x<children.length; x++){
-		  		var node = children[x];
-		  		var cssclass = '';
+		var children = $(node).children();
+		var response = '';
+		
+		for(var x=0; x<children.length; x++){
+	  		var node = children[x];
+	  		var cssclass = '';
+	  		
+	  		// get tag from node
+	  		var tag = node.nodeName.toUpperCase();
+	  		
+	  		// get index from the menu
+	  		var i = utilities.getIndexByAttribute(triangulate.editor.menu, 'tag', tag);
+	  		
+	  		// execute the parse method for the plugin
+	  		if(i != -1){
+		  		var action =triangulate.editor.menu[i].action + '.parse';
 		  		
-		  		// get tag from node
-		  		var tag = node.nodeName.toUpperCase();
-		  		
-		  		// get index from the menu
-		  		var i = utilities.getIndexByAttribute(triangulate.editor.menu, 'tag', tag);
-		  		
-		  		// execute the parse method for the plugin
-		  		if(i != -1){
-			  		var action =triangulate.editor.menu[i].action + '.parse';
-			  		
-			  		try{
-			  			var html = utilities.executeFunctionByName(action, window, node);
-			  			response += html;
-			  		}
-			  		catch(e){
-				  		console.log('[triangulate.Editor.error] could not execute the parse method on the plugin');
-			  		}
+		  		try{
+		  			var html = utilities.executeFunctionByName(action, window, node);
+		  			response += html;
 		  		}
+		  		catch(e){
+			  		console.log('[triangulate.Editor.error] could not execute the parse method on the plugin');
+		  		}
+	  		}
 		 
-		  		
-		 }
+		}
 		
 		return response;
 	}
@@ -1082,6 +1081,8 @@ triangulate.editor.build = function(){
 	
 	// set HTML
   	$(el).html(response); 
+  	
+  	$('[contenteditable=true]').paste();
   	
   	// trigger contentLoaded
 	$(el).trigger('triangulate.editor.contentLoaded');
