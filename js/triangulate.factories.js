@@ -1866,10 +1866,25 @@ angular.module('triangulate.factories', [])
 		
 		var $cache = $cacheFactory.get('$http');
 		$cache.remove(Setup.api + '/file/list');
+		$cache.remove(Setup.api + '/download/list');
 		$cache.remove(Setup.api + '/file/retrieve/size');
 		$cache.remove(Setup.api + '/image/list/all');
 		
 	}
+	
+	// retrieve downloads
+	file.listDownloads = function(callback){
+	
+		// post to API
+		$http.get(Setup.api + '/download/list', {cache:true})
+			.then(function(res){
+				// set data for factory
+				file.data = res.data;
+				return file.data;
+			})
+			.then(callback);
+	}
+	
 	
 	// retrieve files
 	file.list = function(callback){
@@ -1898,11 +1913,12 @@ angular.module('triangulate.factories', [])
 	}
 	
 	// remove file
-	file.remove = function(toBeRemoved, callback){
+	file.remove = function(toBeRemoved, folder, callback){
 	
 		// set params
 		var params = {
-				filename: toBeRemoved.filename
+				filename: toBeRemoved.filename,
+				folder: folder
 			};
 			
 		// set post to URL Encoded

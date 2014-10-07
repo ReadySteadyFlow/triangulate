@@ -170,7 +170,11 @@ angular.module('triangulate.directives', [])
             sending: function(file, xhr, formData){
             
 				if(attrs.filename != '' && attrs.filename != null){
-				  formData.append('overwrite', attrs.filename);
+				  	formData.append('overwrite', attrs.filename);
+				}
+				
+				if(attrs.folder != '' && attrs.folder != null && attrs.folder != undefined){
+					formData.append('folder', attrs.folder);
 				}
 				
 				$(element).find('.dz-message').hide();

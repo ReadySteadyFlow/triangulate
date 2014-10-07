@@ -2244,19 +2244,50 @@ angular.module('triangulate.controllers', [])
 	$scope.temp = null;
 	$scope.totalSize = 0;
 	$scope.fileLimit = $rootScope.site.FileLimit;
+	$scope.folder = 'files';
+	
+	// set current folder
+	$scope.setFolder = function(folder){
+		$scope.folder = folder;
+		
+		
+		// update files
+		$scope.updateFiles();
+		
+	}
 	
 	$scope.updateFiles = function(){
-		// list files
-		File.list(function(data){
+	
+		console.log('[triangulate.test] updateFiles(), folder = ' + $scope.folder);
+	
+		if($scope.folder == 'files'){
 		
-			// debugging
-			if(Setup.debug)console.log('[triangulate.debug] File.list');
-			console.log(data);
+			// list files
+			File.list(function(data){
 			
-			$scope.files = data;
-			$scope.loading = false;
-		});
+				// debugging
+				if(Setup.debug)console.log('[triangulate.debug] File.list');
+				console.log(data);
+				
+				$scope.files = data;
+				$scope.loading = false;
+			});
+		}
+		else{
 		
+			// update downloads
+			File.listDownloads(function(data){
+			
+				// debugging
+				if(Setup.debug)console.log('[triangulate.debug] Download.list');
+				console.log(data);
+				
+				$scope.files = data;
+				$scope.loading = false;
+			});
+			
+		}
+
 		// get file size
 		File.retrieveSize(function(data){
 		
@@ -2299,8 +2330,10 @@ angular.module('triangulate.controllers', [])
 		
 		message.showMessage('progress');
 		
-		File.remove($scope.temp, function(){
+		File.remove($scope.temp, $scope.folder, function(){
 			message.showMessage('success');
+			
+			$scope.updateFiles();
 		});
 		
 		$('#removeDialog').modal('hide');

@@ -9,11 +9,25 @@
     </nav>
     <!-- /nav -->
     
+     <menu>
+    
+    	<div class="dropdown">
+		  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+		    <span id="settings-text">{{'Files' | i18next}}</span>
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu dropdown-auto" role="menu" aria-labelledby="page-types" data-display="#settings-text">
+	  		<li class="active" data-target="#section-site" ng-click="setFolder('files')"><a>{{'Files' | i18next}}</a></li>
+			<li data-target="#section-display" ng-click="setFolder('downloads')"><a>{{'Digital Downloads' | i18next}}</a></li>
+		  </ul>
+		</div>
+    </menu>
+    
     <div id="drop" 
     	ng-if="totalSize <= fileLimit"
-    	class="dropzone dark fixed" drop-zone target="files" filename="{{temp.filename}}" callback="updateFiles()">
+    	class="dropzone dark fixed" drop-zone target="files" filename="{{temp.filename}}" callback="updateFiles()" folder="{{folder}}">
         <span class="dz-message">
-            <i class="fa fa-cloud-upload fa-4x"></i> {{'Drag file here or click to upload' | i18next}}</span>
+            <i class="fa fa-cloud-upload fa-4x"></i> {{'Drag file here or click to upload' | i18next}} to {{folder}}</span>
         </span>
     </div>
     
