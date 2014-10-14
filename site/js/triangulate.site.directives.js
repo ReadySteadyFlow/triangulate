@@ -1061,6 +1061,20 @@ angular.module('triangulate.site.directives', [])
 				return 0;
 			}
 			
+			// remove item from cart
+			scope.remove = function(item) { 
+				var index = $rootScope.cart.indexOf(item);
+				$rootScope.cart.splice(index, 1);     
+			}
+			
+			// remove item from cart
+			scope.change = function(item) { 
+				if(item.quantity <= 0){
+					var index = $rootScope.cart.indexOf(item);
+					$rootScope.cart.splice(index, 1);   
+				}  
+			}
+			
 			// calculates the total
 			scope.total = function(){
 				

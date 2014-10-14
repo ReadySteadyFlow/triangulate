@@ -17,7 +17,12 @@
 				{{item.name}}
 				<small>{{item.sku}} <i ng-show="item.shipping == 'shipped'" class="fa fa-truck"></i></small>
 			</span><span class="quantity">
-				<input type="number" ng-model="item.quantity" class="form-control">
+				<input type="number" ng-model="item.quantity" class="form-control"
+					ng-change="change(item)">
+				<button class="btn btn-default remove"
+					ng-click="remove(item)">
+					<i class="fa fa-times"></i>
+				</button>
 			</span><span class="price">
 				{{item.price | currency: mark}} {{currency}}
 			</span><span class="total">
