@@ -1081,9 +1081,11 @@ triangulate.component.shelf = {
 		
 			var node = $(triangulate.editor.currNode);
 			
+			var uniqId = utilities.uniqid();
+			
 			// add temp shelf item
 			node.find('.shelf-items').append(
-				triangulate.component.shelf.buildMock('NEWSKU', 'New Product', '9.99', 'not shipped', '')
+				triangulate.component.shelf.buildMock(uniqId, uniqId, 'New Product', '9.99', 'not shipped', '', '')
 			);
 			
 		});
@@ -1100,7 +1102,7 @@ triangulate.component.shelf = {
 	},
 	
 	// builds a mock
-	buildMock:function(sku, name, price, shipping, weight){
+	buildMock:function(productId, sku, name, price, shipping, weight, download){
 	
 		// create field
   		var html = '<i class="fa fa-tag"></i><h4 element-text="name">' + name + '</h4>' +
@@ -1109,11 +1111,13 @@ triangulate.component.shelf = {
 		// tag attributes
 		var attrs = [];
 		attrs['class'] = 'shelf-item triangulate-element';
+		attrs['data-productid'] = productId;
 		attrs['data-sku'] = sku;
 		attrs['data-name'] = name;
 		attrs['data-price'] = price;
 		attrs['data-shipping'] = shipping;
 		attrs['data-weight'] = weight;
+		attrs['data-download'] = download;
 		
 		// return element
 		return utilities.element('div', attrs, html);
@@ -1121,32 +1125,38 @@ triangulate.component.shelf = {
 	},
 	
 	// builds a shelf item
-	buildItem:function(sku, name, price, shipping, weight){
+	buildItem:function(productId, sku, name, price, shipping, weight, download){
 	
 		var html = '';
 	
 		// tag attributes
 		var attrs = [];
+		attrs['productid'] = productId;
 		attrs['sku'] = sku;
 		attrs['name'] = name;
 		attrs['price'] = price;
 		attrs['shipping'] = shipping;
 		attrs['weight'] = weight;
+		attrs['download'] = download;
 		
 		// return element
 		return utilities.element('triangulate-shelf-item', attrs, html);
 	},
-
+	
 	// creates shelf
 	create:function(){
 	
 		// generate uniqId
 		var id = triangulate.editor.generateUniqId('shelf', 'shelf');
 		
+		// create a uniqid
+		var uniqId = utilities.uniqid();
+		
 		// build html
 		var html = triangulate.editor.defaults.elementMenu +
 					'<div class="shelf-items">' +
-					triangulate.component.shelf.buildMock('NEWSKU', 'New Product', '9.99', 'not shipped', '') +
+					triangulate.component.shelf.buildMock(uniqId, uniqId, 
+						'New Product', '9.99', 'not shipped', '', '') +
 					'</div>';
 					
 		html += '<button type="button" class="add-sku"><i class="fa fa-plus-circle"></i></button>';
@@ -1183,14 +1193,16 @@ triangulate.component.shelf = {
 		for(y=0; y<items.length; y++){
 					
 			// get attributes
+			var productid = $(items[y]).attr('productid') || '';
 			var sku = $(items[y]).attr('sku') || '';
 			var name = $(items[y]).attr('name') || '';
 			var price = $(items[y]).attr('price') || '';
 			var shipping = $(items[y]).attr('shipping') || '';
 			var weight = $(items[y]).attr('weight') || '';
+			var download = $(items[y]).attr('download') || '';
 			
 			// build mock element
-			html += triangulate.component.shelf.buildMock(sku, name, price, shipping, weight)
+			html += triangulate.component.shelf.buildMock(productid, sku, name, price, shipping, weight, download);
 
 		}
 		
@@ -1215,17 +1227,38 @@ triangulate.component.shelf = {
 	
 		var items = $(node).find('.shelf-items>div');
 		var html = '';
-		  
+		
+		// get scope from page
+		var scope = angular.element($("section.main")).scope();
+		
+		// clear products for the page
+		scope.clearProducts();
+	  
   		for(var y=0; y<items.length; y++){
   			item = $(items[y]);
   			
+  			// build a product
+  			var product = {
+  					productId: item.attr('data-productid') || '', 
+					sku: item.attr('data-sku') || '', 
+					name: item.attr('data-name') || '',
+					price: item.attr('data-price') || '',
+					shipping: item.attr('data-shipping') || '',
+					weight: item.attr('data-weight') || '',
+					download: item.attr('data-download') || ''};
+  			
   			// build item
   			html += triangulate.component.shelf.buildItem(
-  				item.attr('data-sku') || '', 
-  				item.attr('data-name') || '', 
-  				item.attr('data-price') || '', 
-  				item.attr('data-shipping') || '', 
-  				item.attr('data-weight') || '');
+  				product.productId, 
+  				product.sku, 
+  				product.name, 
+  				product.price, 
+  				product.shipping, 
+  				product.weight,
+  				product.download);
+  				
+  			// add products for the page
+  			scope.addProduct(product);
   										
   		}
   	

@@ -262,4 +262,29 @@ angular.module('triangulate.site.factories', [])
 	return translation;
 	
 })
+
+// setup factory
+.factory('Transaction', function($http, $rootScope){
+	
+	var transaction = {};
+	
+	// retrieve languages
+	transaction.receipt = function(processorTransactionId, callback){
+		
+		// set params
+		var params = {
+			processorTransactionId: processorTransactionId
+		}
+		// set post to URL Encoded
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+	
+		// post to API
+		$http.post($rootScope.site.API + '/transaction/receipt', $.param(params))
+			.success(callback);
+			
+	}
+	
+	return transaction;
+	
+})
 ;

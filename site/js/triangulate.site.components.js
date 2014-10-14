@@ -239,6 +239,20 @@ triangulate.Calendar.AddEvent = function(calendarId, beginDate, endDate, content
 	if(els.length > 0){
 		$(els[0]).append(content);
 	}				
+}
 
+// reusable utility methods
+triangulate.utilities = {
 
+	getQueryStringByName:function(name){
+		name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+		var regexS = "[\\?&]" + name + "=([^&#]*)";
+		var regex = new RegExp(regexS);
+		var results = regex.exec(window.location.href);
+		if(results == null)
+			return "";
+		else
+			return decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	
 }

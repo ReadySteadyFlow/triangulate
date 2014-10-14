@@ -798,6 +798,7 @@ angular.module('triangulate.site.directives', [])
 		
 		restrict: 'E',
 		scope: {
+			productid: '@',
 			sku: '@',
 			name: '@',
 			price: '@',
@@ -825,7 +826,7 @@ angular.module('triangulate.site.directives', [])
 			
 				// create item
 				var item = {
-					sku: scope.sku,
+					sku: scope.productid,
 					name: scope.name,
 					price: scope.price,
 					shipping: scope.shipping,
@@ -864,6 +865,38 @@ angular.module('triangulate.site.directives', [])
 	
 })
 
+// builds a receipt based on a transaction
+.directive('triangulateReceipt', function($rootScope, $sce, Transaction){
+	
+	return{
+		
+		restrict: 'E',
+		scope: {
+			id: '@'
+		},
+		templateUrl: 'templates/triangulate/receipt.html',
+		link: function(scope, element, attr){
+					
+			// update the list
+			var list = function(){
+		
+				// list the receipt
+				Transaction.receipt(scope.id, 
+					function(data){  // success
+						scope.receipt = $sce.trustAsHtml(data);
+						
+					});
+				
+			}
+			
+			// retrieve the receipt
+			list();	
+		}
+		
+	}
+	
+})
+
 // cart
 .directive('triangulateCart', function($rootScope, $i18next, Translation){
 	
@@ -876,6 +909,12 @@ angular.module('triangulate.site.directives', [])
 		replace: true,
 		templateUrl: 'templates/triangulate/cart.html',
 		link: function(scope, element, attr){
+		
+			// get transaction variable passed from paypal
+			var tx = triangulate.utilities.getQueryStringByName('tx');
+			
+			// set variable
+			$rootScope.tx = tx;
 		
 			scope.currentPageId = $rootScope.page.PageId;
 			scope.cart = $rootScope.cart;
@@ -1034,9 +1073,9 @@ angular.module('triangulate.site.directives', [])
 			scope.checkoutWithPayPal = function(){
 				
 				var email = $rootScope.site.PayPalId;
-				var logo = 'http://' + $rootScope.site.Domain + '/' + $rootScope.site.LogoUrl;
+				var logo = $rootScope.site.ImagesURL + $rootScope.site.LogoUrl;
 				var currency = $rootScope.site.Currency;
-				var returnUrl = 'http://' + $rootScope.site.Domain;
+				var returnUrl = $rootScope.site.Domain;
 				var api = $rootScope.site.API;
 				var siteId = $rootScope.site.SiteId;
 				var weightUnit = $rootScope.site.WeightUnit;
@@ -1058,7 +1097,7 @@ angular.module('triangulate.site.directives', [])
 					'business':			email,
 					'rm':				'0',
 					'charset':			'utf-8',
-					'return':			returnUrl + '/thank-you#clear-cart',
+					'return':			returnUrl + '/thank-you',
 					'cancel_return':	returnUrl + '/cancel',
 					'notify_url':		api + '/transaction/paypal',
 					'custom':			siteId

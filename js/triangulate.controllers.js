@@ -722,7 +722,7 @@ angular.module('triangulate.controllers', [])
 })
 
 // content controller
-.controller('ContentCtrl', function($scope, $rootScope, $stateParams, $sce, Setup, Site, Page, Version, PageType, Image, Icon, Theme, Layout, Stylesheet, Editor, Translation, File) {
+.controller('ContentCtrl', function($scope, $rootScope, $stateParams, $sce, Setup, Site, Page, Version, PageType, Image, Icon, Theme, Layout, Stylesheet, Editor, Translation, File, Product) {
 	
 	$rootScope.template = 'content';
 	
@@ -893,11 +893,13 @@ angular.module('triangulate.controllers', [])
 		  			// set config-text convenience method
 		  			$(triangulate.editor.currElement).find('[element-text="' + index + '"]').text(attr);
 		  			
-		  			// create eventName
-		  			var eventName = triangulate.editor.currConfig.attr('data-action') + '.element.' + index + '.change';
+		  			if(triangulate.editor.currConfig){
+		  				// create eventName
+		  				var eventName = triangulate.editor.currConfig.attr('data-action') + '.element.' + index + '.change';
 		  			
-		  			// trigger change
-		  			$(triangulate.editor.el).trigger(eventName, {index: index, attr: attr});
+		  				// trigger change
+		  				$(triangulate.editor.el).trigger(eventName, {index: index, attr: attr});
+		  			}
 		  		}
 	  		}
 	  		
@@ -1216,6 +1218,24 @@ angular.module('triangulate.controllers', [])
 		});
 	}
 	
+	// updates downloads
+	$scope.updateDownloads = function(){
+	
+		// list files
+		File.listDownloads(function(data){
+		
+			// debugging
+			if(Setup.debug)console.log('[triangulate.debug] File.listDownloads');
+			console.log(data);
+			
+			$scope.downloads = data;
+			$scope.loading = false;
+		});
+		
+	}
+	
+	$scope.updateDownloads();
+	
 	// retrieve pre-cached editor items
 	$scope.editorItems = $rootScope.editorItems;
 	
@@ -1341,6 +1361,18 @@ angular.module('triangulate.controllers', [])
 		var previewUrl = 'sites/' + $scope.site.FriendlyId + '/#/' + $scope.page.Url + '?preview=true';
 		
 		Page.preview($scope.pageId, content, function(data){});
+	}
+	
+	// add product
+	$scope.addProduct = function(product){
+	
+		Product.add(product, $scope.pageId, function(data){});
+	}
+	
+	// clear products
+	$scope.clearProducts = function(){
+	
+		Product.clear($scope.pageId, function(data){});
 	}				
 
 })
