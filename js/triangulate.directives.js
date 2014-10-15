@@ -229,4 +229,27 @@ angular.module('triangulate.directives', [])
 	  	
 		
 	}
-});
+})
+
+.directive('triangulateSpectrum', function(Setup) {
+    return {
+        // attribute
+        restrict: 'A',
+       
+        link: function(scope, element, attrs) {
+        
+        	 	$(element).spectrum({
+        	 		change: function(color) {
+					    //alert(color.toHexString()); // #ff0000
+					    
+					    var hex = color.toHexString();
+					    
+					    document.execCommand('foreColor', false, hex);
+					}
+        	 	});
+          
+        }
+    };
+})
+
+;

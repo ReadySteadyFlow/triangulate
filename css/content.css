@@ -527,6 +527,12 @@ body.content{}
 	padding-bottom: 100px;
 }
 
+	.content .context-menu .font-up, .content .context-menu .font-down{
+		font-size: 12px;
+		color: #888;
+		margin-left: -2px;
+	}
+
 	.content .context-menu .text-block{
 		display: inline-block;
 		padding-top: 7px;
@@ -553,6 +559,7 @@ body.content{}
 	.content .context-menu h2 a{
 		float: right;
 		text-transform: none;
+		margin-left: 5px;
 	}
 	
 	.content .context-menu h2 i{
@@ -599,6 +606,19 @@ body.content{}
 	
 	.content .context-menu .form-group{
 		position: relative;
+	}
+	
+	/* spectrum */
+	.content .context-menu .sp-replacer{
+		border-color: #ccc;
+	}
+	
+	.content .context-menu .sp-dd{
+		display: none;
+	}
+	
+	.content .context-menu .sp-preview{
+		margin-right: 0;
 	}
 	
 	/* input selection */

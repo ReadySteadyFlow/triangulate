@@ -1,6 +1,7 @@
 <div class="context-text-events">
 
-	<h2>{{'Text' | i18next}}</h2>
+	<h2>{{'Text' | i18next}} 
+		<a data-action="triangulate.text.undo"><i class="fa fa-undo"></i></a></h2>
 	
 	<div class="context-block">
 	
@@ -13,6 +14,13 @@
 		<a data-action="triangulate.text.link"><i class="fa fa-link"></i></a>
 		<a data-action="triangulate.text.code"><i class="fa fa-code"></i></a>
 		<a data-action="triangulate.text.icon"><i class="fa fa-flag"></i></a>
+		<a data-action="triangulate.text.alignLeft"><i class="fa fa-align-left"></i></a>
+		<a data-action="triangulate.text.alignCenter"><i class="fa fa-align-center"></i></a>
+		<a data-action="triangulate.text.alignRight"><i class="fa fa-align-right"></i></a>
+		<a data-action="triangulate.text.increaseFont"><i class="fa fa-font"></i> <i class="fa fa-caret-up font-up"></i></a>
+		<a data-action="triangulate.text.decreaseFont"><i class="fa fa-font"></i> <i class="fa fa-caret-down font-down"></i></a>
+		
+		<input type="text" class="spectrum" triangulate-spectrum>
 
 	</div>
 	<!-- /.context-block -->
