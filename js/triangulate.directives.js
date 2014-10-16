@@ -239,11 +239,22 @@ angular.module('triangulate.directives', [])
         link: function(scope, element, attrs) {
         
         	 	$(element).spectrum({
+        	 		beforeShow: function(){
+	        	 		utilities.selection = utilities.saveSelection();
+	        	 		
+	        	 		console.log('set selection');
+        	 		},
         	 		change: function(color) {
-					    //alert(color.toHexString()); // #ff0000
 					    
+					    // restore selection
+					    if(utilities.selection != null){
+					    	utilities.restoreSelection(utilities.selection);
+						}
+					    
+					    // get hex
 					    var hex = color.toHexString();
 					    
+					    // execute forecolor
 					    document.execCommand('foreColor', false, hex);
 					}
         	 	});

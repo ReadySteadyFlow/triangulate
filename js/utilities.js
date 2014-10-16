@@ -1,5 +1,7 @@
 // handles global functions for this app
 var utilities = {
+
+	selection:null,
     
     init:function(){
     
