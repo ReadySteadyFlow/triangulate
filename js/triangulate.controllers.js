@@ -219,6 +219,56 @@ angular.module('triangulate.controllers', [])
         Stripe.createToken(form, stripeResponseHandler);
 	}
 	
+	// subscribe with Paypal (https://www.paypal.com/cgi-bin/webscr?cmd=_pdn_subscr_techview_outside)
+	// variables: https://developer.paypal.com/docs/classic/paypal-payments-standard/integration-guide/Appx_websitestandard_htmlvariables/#id08A6HI00JQU
+	$scope.payWithPaypal = function(){
+	
+		var useSandbox = true;
+		var email = 'test';
+		var currency = 'temp';
+		var returnUrl = '';
+		var api = '';
+		
+		// live url
+		var url = 'https://www.paypal.com/cgi-bin/webscr';
+
+		// set to sandbox if specified
+		if(useSandbox){
+			url = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
+		}
+	
+		var data = {
+			'email':			email,
+			'cmd':				'_xclick-subscriptions',
+			'currency_code': 	currency,
+			'business':			email,
+			'no_shipping':		'1',
+			'charset':			'utf-8',
+			'a3':				'5.00',
+			'p3':				'1',
+			't3':				'M',
+			'src':				'1',
+			'sra':				'1',
+			'return':			returnUrl + '/thank-you',
+			'cancel_return':	returnUrl + '/cancel',
+			'notify_url':		api + '/transaction/paypal',
+			'custom':			$rootScope.site.SiteId
+		};
+	
+		// create form with data values
+		var form = $('<form id="paypal-form" action="' + url + '" method="POST"></form');
+
+		for(x in data){
+			form.append('<input type="hidden" name="'+x+'" value="'+data[x]+'" />');
+		}
+
+		// append form
+		$('body').append(form);
+
+		// submit form
+		$('#paypal-form').submit();
+	}
+	
 })
 
 // Thankyou controller

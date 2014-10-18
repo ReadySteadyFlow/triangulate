@@ -3,7 +3,7 @@
     <nav>
         <a class="show-menu"></a>
         
-        <h1>{{'Pages' | i18next}}</h1>
+        <h1>{{'Pages' | i18next}} {{site.Status}}</h1>
          
        <button ng-click="showAddPage()"
        		class="primary-action">
@@ -32,7 +32,7 @@
 		</div>
   
     </nav>
-    
+  
     <section class="notice" ng-if="site.Status == 'Trial'">
     	<a ui-sref="app.signup">
     		<span class="days-left">{{site.Created | daysLeft}} {{'days left' | i18next}}</span>
@@ -97,7 +97,7 @@
     		<h2>
     			<a 	ng-class="{hasDraft:page.HasDraft}"
     				ng-show="(page.CanEdit || page.CanPublish)" 
-    				ng-href="#/app/content/{{page.PageId}}">
+    				ui-sref="app.content({ id: page.PageId })">
     				<span class="draft-tag" ng-show="page.HasDraft">*</span>
     				{{page.Name}}
     			</a>
