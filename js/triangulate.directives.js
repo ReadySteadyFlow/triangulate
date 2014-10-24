@@ -235,10 +235,16 @@ angular.module('triangulate.directives', [])
     return {
         // attribute
         restrict: 'A',
-       
+		scope: { 
+			current: '=' 
+		},
         link: function(scope, element, attrs) {
-        
+	        
+	        	var val = attrs.color;
+	        	
         	 	$(element).spectrum({
+	        	 	color: val,
+	        	 	showInput: true,
         	 		beforeShow: function(){
 	        	 		utilities.selection = utilities.saveSelection();
 	        	 		
@@ -253,6 +259,13 @@ angular.module('triangulate.directives', [])
 					    
 					    // get hex
 					    var hex = color.toHexString();
+					    
+					    scope.$apply(
+						    function(){
+							    scope.current.selected = hex;
+						    }
+					    )
+						
 					    
 					    // execute forecolor
 					    document.execCommand('foreColor', false, hex);

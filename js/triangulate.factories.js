@@ -247,7 +247,7 @@ angular.module('triangulate.factories', [])
 			.error(failureCallback);
 		
 	}
-	
+
 	// retrieve a list of sites
 	site.list = function(callback){
 	
@@ -1716,6 +1716,30 @@ angular.module('triangulate.factories', [])
 	
 		// post to API
 		$http.get(Setup.api + '/theme/pages/list')
+			.success(callback);
+	}
+	
+	// retrieve configurations for theme
+	theme.listConfigurations = function(callback){
+	
+		// post to API
+		$http.get(Setup.api + '/theme/configurations/list')
+			.success(callback);
+	}
+	
+	// applies configurations to a theme
+	theme.applyConfigurations = function(configurations, callback){
+	
+		// set params
+		var params = {
+			configurations: configurations
+			};
+			
+		// set post to URL Encoded
+		$http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+	
+		// post to API
+		$http.post(Setup.api + '/theme/configurations/apply', $.param(params))
 			.success(callback);
 	}
 	

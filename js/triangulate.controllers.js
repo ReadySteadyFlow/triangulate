@@ -151,10 +151,12 @@ angular.module('triangulate.controllers', [])
 	// setup
 	$scope.setup = Setup;
 	
+	var plan = $scope.setup.plans[0].id;
+	
 	// temporary model
 	$scope.temp = {
 		'email': '',
-		'plan': 'triangulate-starter',
+		'plan': plan,
 		'payWith': 'stripe',
 		'domain': ''
 	}
@@ -211,7 +213,9 @@ angular.module('triangulate.controllers', [])
 	// pay with Stripe
 	$scope.payWithStripe = function(){
 		$scope.stripeError = '';
-	
+		
+		var plan = $scope.temp.plan;
+		
 		var form = $('#subscribe-form');
         
         message.showMessage('progress');
@@ -222,12 +226,34 @@ angular.module('triangulate.controllers', [])
 	// subscribe with Paypal (https://www.paypal.com/cgi-bin/webscr?cmd=_pdn_subscr_techview_outside)
 	// variables: https://developer.paypal.com/docs/classic/paypal-payments-standard/integration-guide/Appx_websitestandard_htmlvariables/#id08A6HI00JQU
 	$scope.payWithPaypal = function(){
+		
+		var id = $scope.temp.plan;
+		var current = -1;
+		
+		// get plan by id
+		for(x=0; x < $scope.setup.plans.length; x++){
+			
+			if($scope.setup.plans[x].id == id){
+				current = x;
+			}
 	
-		var useSandbox = true;
-		var email = 'test';
-		var currency = 'temp';
-		var returnUrl = '';
-		var api = '';
+		}
+		
+		// make sure that x was found
+		if(x == -1){
+			 message.showMessage('error');
+			 console.log('[Triangulate.error] could not find plan');
+			 return;
+		}
+		
+		var plan = $scope.setup.plans[current];
+	
+		// get variables from setup
+		var useSandbox = $scope.setup.paypalUseSandbox;
+		var email = $scope.setup.paypalEmail;
+		var currency = $scope.setup.paypalCurrency;
+		var returnUrl = $scope.setup.url + '/app/thankyou';
+		var api = $scope.setup.api;
 		
 		// live url
 		var url = 'https://www.paypal.com/cgi-bin/webscr';
@@ -237,23 +263,30 @@ angular.module('triangulate.controllers', [])
 			url = 'https://www.sandbox.paypal.com/cgi-bin/webscr'
 		}
 	
+		// set data for transaction
 		var data = {
+			'item_name':		'Triangulate Subscription - ' + plan.desc + ' (' + $scope.temp.domain + ')',
 			'email':			email,
 			'cmd':				'_xclick-subscriptions',
 			'currency_code': 	currency,
 			'business':			email,
 			'no_shipping':		'1',
 			'charset':			'utf-8',
-			'a3':				'5.00',
+			'a3':				plan.price,
 			'p3':				'1',
-			't3':				'M',
+			't3':				plan.interval,
 			'src':				'1',
 			'sra':				'1',
-			'return':			returnUrl + '/thank-you',
-			'cancel_return':	returnUrl + '/cancel',
-			'notify_url':		api + '/transaction/paypal',
+			'return':			returnUrl + '?thank-you',
+			'cancel_return':	returnUrl + '?cancel',
+			'notify_url':		api + '/transaction/paypal/subscribe',
 			'custom':			$rootScope.site.SiteId
 		};
+	
+		// set logo
+		if($scope.setup.paypalLogo != ''){
+			data['image_url'] = $scope.setup.paypalLogo;
+		}
 	
 		// create form with data values
 		var form = $('<form id="paypal-form" action="' + url + '" method="POST"></form');
@@ -2118,6 +2151,11 @@ angular.module('triangulate.controllers', [])
 	
     $scope.themeId = Site.Theme;
     
+    // back
+	$scope.back = function(){
+		window.history.back();
+	}
+    
     // setup carousel
 	$('#update-theme').carousel({
 		interval: false,
@@ -2209,6 +2247,133 @@ angular.module('triangulate.controllers', [])
 		$('#resetDialog').modal('hide');
 	}
 	
+})
+
+// theme controller
+.controller('ConfigureCtrl', function($scope, $state, $rootScope, $sce, Setup, Theme, Site, Image, File) {
+	
+	$rootScope.template = 'configure';
+	
+	// setup
+	$scope.setup = Setup;
+	
+	$scope.themeId = Site.Theme;
+    $scope.domain = Site.Domain;
+    $scope.configs = [];
+	$scope.totalSize = 0;
+	$scope.fileLimit = $rootScope.site.FileLimit;
+	$scope.control = null;
+    
+    // retrieve site
+	Site.retrieve(function(data){
+		$scope.site = data;
+		
+		$scope.themeId = data.Theme;
+		$scope.domain = data.Domain;
+		
+		var stamp = moment().format('X');
+			
+		var url = $scope.domain + '/index.html?t='+stamp;
+		
+		$scope.currentSite = $sce.trustAsResourceUrl(url);
+	});
+	
+	// retrieve configurations
+	Theme.listConfigurations(function(data){	
+		$scope.configs = data;
+	});
+	
+	// apply themes
+	$scope.apply = function(){
+		
+		message.showMessage('progress');
+		
+		var str = angular.toJson($scope.configs);
+		
+		Theme.applyConfigurations(str, function(){	
+			message.showMessage('success');
+		
+			function refresh(){
+				var stamp = moment().format('X');
+					
+				var url = $scope.domain + '/index.html?t='+stamp;
+				
+				$scope.currentSite = $sce.trustAsResourceUrl(url);
+			}
+			
+			setTimeout(refresh(), 5);
+		
+		});
+		
+	}
+	
+	// refresh theme
+	$scope.refresh = function(){
+		var stamp = moment().format('X');
+				
+		var url = $scope.domain + '?t='+stamp;
+		
+		$scope.currentSite = $sce.trustAsResourceUrl(url);
+	}
+	
+	// navigate to change theme
+	$scope.changeTheme = function(){
+		$state.go('app.theme');
+	}
+	
+	// shows the images dialog
+	$scope.showAddImage = function(control){
+		$scope.control = control;
+		$('#imagesDialog').modal('show');
+	}
+	
+	// list new images
+	$scope.updateImages = function(){
+		Image.list(function(data){
+			// debugging
+			if(Setup.debug)console.log('[triangulate.debug] Image.list');
+			console.log(data);
+			
+			$scope.images = data;
+		});
+	}
+	
+	// get file size
+	File.retrieveSize(function(data){
+	
+		// debugging
+		if(Setup.debug)console.log('[triangulate.debug] File.retrieveSize');
+		console.log(data);
+		
+		$scope.totalSize = parseFloat(data);
+	});
+	
+	// update the images for the dialog
+	$scope.updateImages();
+	
+	// updates the icon bg
+	$scope.updateIconBg = function(){
+		
+		message.showMessage('progress');
+	
+		Site.updateIconBg($scope.site.IconBg, function(){
+			message.showMessage('success');
+		});
+	}
+	
+	// add image
+	$scope.addImage = function(image){
+	
+		// setup url for images
+		var url = $scope.site.ImagesURL + 'files/' + image.filename;
+		
+		// set selected
+		$scope.control.selected = url;
+		
+		// hide modal
+		$('#imagesDialog').modal('hide');
+	}
+    
 })
 
 // branding controller

@@ -49,14 +49,14 @@ body input.form-control[type=email],
 body select.form-control,
 body textarea.form-control{
 	font-size: 15px;
-	box-shadow: none !important;
+	box-shadow: none;
 	background: none;
-	outline: none !important;
-	border: none !important;
-	border: 1px solid #ddd !important;
-	border-radius: 0 !important;
-	padding: 5px 10px !important;
-	height: 45px !important;
+	outline: none;
+	border: none;
+	border: 1px solid #ddd;
+	border-radius: 0;
+	padding: 5px 10px;
+	height: 45px;
     background-color: transparent;
     -webkit-appearance: none;
 	-webkit-border-radius: 0px;
@@ -1550,6 +1550,23 @@ body .carousel .carousel-control{
 		max-width: 1000px;
 		margin: 20px;
 	}
+
+/* configure */
+.configure{
+	overflow: hidden;
+}
+
+.configure .main{
+	height: calc(100% - 65px);
+	padding: 0 !important;
+}
+
+.configure iframe{
+	width: calc(100% - 250px);
+	height: 100%;
+	border: none;
+}	
+	
 	
 /* Large desktop */
 @media (min-width: 1200px) { }

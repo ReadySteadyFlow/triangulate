@@ -38,4 +38,25 @@ angular.module('triangulate.filters', [])
 		
 		return difference;
 	}
-});
+})
+
+.filter('toid', function() {
+    return function(text) {
+    	
+    	var text = text.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g, '');
+    	return text.replace(/\s+/g, '-').toLowerCase();
+      
+	}
+})
+
+
+.filter('toHuman', function(){
+	return function(text) {
+		if(text != undefined){
+			return text.charAt(0).toUpperCase() + text.substr(1);
+		}
+		else return text;
+		
+	}	
+})
+;

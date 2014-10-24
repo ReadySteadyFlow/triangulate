@@ -1,13 +1,40 @@
-/* import global styles */
-@import url("search.css");
-@import url("calendar.css");
-@import url("cart.css");
+body{
+	background: config(--body-background-color) config(--body-background-image) config(--body-background-repeat) config(--body-background-position);
+	background-size: config(--body-background-size);
+}
 
-h1, h2, h3, p, blockquote{
+body h1, body h2, body h3, body h4, body h5, body p, body blockquote{
 	margin-bottom: 25px;
 }
 
-p, blockquote{
+body h1{
+	font-size: config(--h1-font-size);
+	color: config(--h1-color);
+}
+
+body h2{
+	font-size: config(--h2-font-size);
+	color: config(--h2-color);
+}
+
+body h3{
+	font-size: config(--h3-font-size);
+	color: config(--h3-color);
+}
+
+body h4{
+	font-size: config(--h4-font-size);
+	color: config(--h4-color);
+}
+
+body h5{
+	font-size: config(--h1-font-size);
+	color: config(--h1-color);
+}
+
+body p, body blockquote, body label, body td, body th, body li{
+	font-size: config(--default-font-size);
+	color: config(--default-color);
 	line-height: 25px;
 }
 
@@ -33,10 +60,19 @@ pre.prettyprint ol.linenums{
 }
 
 footer{
-  	border-top: 2px solid #f0f0f0;
+  	border-top: 2px solid config(--footer-border-color);
 	margin: 25px 0 0 0;
   	padding: 25px 10px 25px 10px;
+  	background-color: config(--footer-background-color);
 }
+
+	footer h4{
+  		color: config(--footer-headline-color);
+	}
+	
+	footer a{
+		color: config(--footer-link-color);
+	}
 
     footer div{
         text-align: left;
@@ -44,6 +80,7 @@ footer{
 
 	footer p{
 		margin-bottom: 5px;
+		color: config(--footer-text-color);
 	}
 
 	footer .menu{
@@ -56,10 +93,12 @@ footer{
   		height: 40px;
   		line-height: 40px;
   		text-align: center;
-  		border: 1px solid #ddd;
+  		border: 1px solid config(--footer-icon-color);
   		border-radius: 50%;
   		font-size: 16px;
   		margin: 0 10px 0 0;
+  		color: config(--footer-icon-color);
+  		background-color: config(--footer-icon-background-color);
   		
 	}
 
@@ -169,6 +208,13 @@ div.triangulate-image[data-display=right] img{
   	padding: 0;
 }
 
+body .navbar-default{
+	background-color: config(--nav-background-color);
+}
+
+body .navbar-default ul.nav li a{
+	color: config(--nav-text-color);
+}
 
 /* map */
 div.map-container{
@@ -212,8 +258,8 @@ div.map-container{
   	height: 50px;
   	line-height: 50px;
   	text-align: center;
-  	border-left: 1px solid #e7e7e7;
-  	color: #777;
+  	border-left: 1px solid rgba(255,255,255,.8);
+  	color: config(--nav-icon-color);
 }
 
 .triangulate-settings{

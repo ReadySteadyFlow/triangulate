@@ -1,11 +1,27 @@
 // page controller
-.controller('{{ctrl}}Ctrl', function($scope, $location, $rootScope) {
+.controller('PageCtrl', function($scope, $location, $rootScope, $attrs) {
 
 	// set user
 	$scope.user = $rootScope.user;
+	$rootScope.timeStamp = '';
+	
+	// get timestamp (if set)
+	var t = triangulate.utilities.getQueryStringByName('t');
 	
 	// set page variables
-	var page = {{page}};
+	var pages = {{pages}};
+	
+	// get pageid
+	var pageid = $attrs.page;
+	
+	// get current page
+	var page = pages[pageid];
+	
+	// append a timestamp for previews
+	if(t != '' && t != undefined){
+		page.FullStylesheetUrl = page.FullStylesheetUrl + '?t='+t;
+		$rootScope.timeStamp = '?t='+t;
+	}
 	
 	// set site variables
 	var site = {{site}};

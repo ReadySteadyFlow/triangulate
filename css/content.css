@@ -513,7 +513,7 @@ body.content{}
 	}
 
 /* aside */
-.content .context-menu{
+.context-menu{
 	position: absolute;
 	box-sizing: border-box;
 	top: 114px;
@@ -527,25 +527,30 @@ body.content{}
 	padding-bottom: 100px;
 }
 
-	.content .context-menu .font-up, .content .context-menu .font-down{
+	.configure .context-menu{
+		top: 65px;
+		height: calc(100% - 65px);
+	}
+
+	.context-menu .font-up, .context-menu .font-down{
 		font-size: 12px;
 		color: #888;
 		margin-left: -2px;
 	}
 
-	.content .context-menu .text-block{
+	.context-menu .text-block{
 		display: inline-block;
 		padding-top: 7px;
 	}
 
-	.content .context-menu.sticky{
+	.context-menu.sticky{
 	    position: fixed;
 	    top: 50px;
 	    right: 0;
 		height: calc(100% - 50px);
 	}
 
-	.content .context-menu h2{
+	.context-menu h2{
 		margin: -1px 0 0 0;
 		padding: 11px 5px;
 		font-size: 13px;
@@ -556,23 +561,23 @@ body.content{}
 		font-weight: 300;
 	}
 	
-	.content .context-menu h2 a{
+	.context-menu h2 a{
 		float: right;
 		text-transform: none;
 		margin-left: 5px;
 	}
 	
-	.content .context-menu h2 i{
+	.context-menu h2 i{
 		color: #888;
 	}
 	
 	
 	/* toggles context menu */
-	.content .context-menu .config{
+	.context-menu .config{
 		display: none;
 	}
 	
-	.content .context-menu .config.active{
+	.context-menu .config.active{
 		display: block;
 	}
 	
@@ -600,35 +605,35 @@ body.content{}
 		background-color: #f0f0f0;
 	}
 	
-	.content .context-menu label, .content .context-menu .form-control{
+	.context-menu label, .context-menu .form-control{
 		display: inline-block;
 	}
 	
-	.content .context-menu .form-group{
+	.context-menu .form-group{
 		position: relative;
 	}
 	
 	/* spectrum */
-	.content .context-menu .sp-replacer{
+	.context-menu .sp-replacer{
 		border-color: #ccc;
 	}
 	
-	.content .context-menu .sp-dd{
+	.context-menu .sp-dd{
 		display: none;
 	}
 	
-	.content .context-menu .sp-preview{
+	.context-menu .sp-preview{
 		margin-right: 0;
 	}
 	
 	/* input selection */
-	.content .context-menu .input-select{
+	.context-menu .input-select{
 		position: absolute;
 		top: 1px;
 		right: 2px;
 	}
 	
-		.content .context-menu .input-select button{
+		.context-menu .input-select button{
 			display: inline-block;
 			box-sizing: border-box;
 			padding: 0 7px 4px 7px;
@@ -637,32 +642,32 @@ body.content{}
 			border-left: 1px solid #f0f0f0;
 		}
 		
-		.content .context-menu .input-select .dropdown-menu{
+		.context-menu .input-select .dropdown-menu{
 			border-radius: 0;
 			border: 1px solid #ddd;
 		}
 		
-		.content .context-menu .input-select .dropdown-menu li{
+		.context-menu .input-select .dropdown-menu li{
 			border-bottom: 1px solid #f0f0f0;
 		}
 		
-		.content .context-menu .input-select .dropdown-menu li a{
+		.context-menu .input-select .dropdown-menu li a{
 			color: #222;
 			font-size: 13px;
 		}
 		
-		.content .context-menu .input-select .dropdown-menu li small{
+		.context-menu .input-select .dropdown-menu li small{
 			display: block;
 			color: #888;
 			font-size: 11px;
 		}
 		
-		.content .context-menu .input-select .dropdown-menu{
+		.context-menu .input-select .dropdown-menu{
 			height: 150px;
 			overflow: auto;
 		}
 	
-	.content .context-menu label{
+	.context-menu label{
 		width: 75px;
 		color: #555;
 		font-size: 12px;
@@ -670,7 +675,7 @@ body.content{}
 		margin-top: 7px;
 	}
 	
-	.content .context-menu .help-block{
+	.context-menu .help-block{
 		display: block;
 		font-size: 11px;
 		padding-left: 80px;
@@ -678,37 +683,37 @@ body.content{}
 		text-transform: uppercase;
 	}
 
-	.content .context-menu .form-control{
+	body .context-menu .form-control{
 		width: 160px;
-		background-color: #fff;
+		background-color: #fff !important;
 		border-radius: 0 !important;
 		padding: 0 5px !important;
 		height: 30px !important;
-		line-height: 30px;
+		line-height: 30px !important;
 		border: 1px solid #ddd;
 		border-radius: 0 !important;
 		outline: none !important;
 	}
 	
-	.content .context-menu textarea.form-control{
+	.context-menu textarea.form-control{
 		height: 75px !important;
 		line-height: 20px !important;
 		padding-top: 5px !important;	
 	}
 	
-	.content .context-block{
+	body .context-menu .context-block{
 		padding: 10px 5px 0 5px;
 	}
 	
-	.content .context-menu .context-footer{
-		position: absolute;
+	.context-menu .context-footer{
+		position: fixed;
 		bottom: 0;
-		left: 0;
-		width: 100%;
+		right: 0;
+		width: 250px;
 		text-align: right;
 	}
 	
-	.content .context-menu .context-footer button{
+	.context-menu .context-footer button{
 		float:left;
 		box-sizing: border-box;
 		padding: 10px 0;
@@ -719,20 +724,57 @@ body.content{}
 		border: none;
 		font-size: 13px;
 		outline: none;
-		background-color: #f0f0f0;
+		background-color: #fff;
 		border: 1px solid #ddd;
-		border-radius: 25px;
 	}
 	
-	.content .context-menu .context-footer button:hover{
-		border-color: #A4110A;
+	.context-menu .context-footer button:hover{
+		border-color: #888;
 	}
 	
 	body .context-menu select.form-control{
 		background: url('../images/down.png') no-repeat right 6px;
 		background-size: 20px;
+	}
+	
+	body .context-menu .form-group{
+		position: relative;
+	}
+	
+	body .context-menu .form-group .sp-replacer{
+		position: absolute;
+		top: 0;
+		right: 0;
+		border: 1px solid #ddd;
+		background-color: #fff;
+		border-left: 1px solid transparent;
+		background-color: #f8f8f8;
 	}	
+	
+		body .context-menu .form-group .sp-preview{
+			border: 1px solid #aaa;
+		}
+	
+	body .context-menu .form-group .image-picker{
+		position: absolute;
+		top: 0;
+		right: 0;
+		margin: 0;
+		padding: 0;
+		width: 35px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		border: 1px solid #ddd;
+		background-color: #f8f8f8;
+		border-left: 1px solid #f8f8f8;
+		outline: none;
+	}
 
+	body .context-menu .form-group .image-picker i{
+		color: #777;
+	}
+	
 
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) { 
@@ -741,7 +783,7 @@ body.content{}
 		margin: 10px 0 0 0 !important;
 	}
 	
-	body.content .context-menu{
+	body.context-menu{
 		display: none;
 	}
 	
