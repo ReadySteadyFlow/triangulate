@@ -210,6 +210,7 @@ div.triangulate-image[data-display=right] img{
 
 body .navbar-default{
 	background-color: config(--nav-background-color);
+	border-color: config(--nav-border-color);
 }
 
 body .navbar-default ul.nav li a{
@@ -258,18 +259,18 @@ div.map-container{
   	height: 50px;
   	line-height: 50px;
   	text-align: center;
-  	border-left: 1px solid rgba(255,255,255,.8);
+  	border-left: 1px solid config(--nav-border-color);
   	color: config(--nav-icon-color);
 }
 
 .triangulate-settings{
 	display: block;
-	background-color: #777;
+	background-color: config(--settings-background-color);
 	text-align: right;
 	height: 50px;
   	line-height: 50px;
 	padding: 0 10px;
-	color: #ccc;
+	color: config(--settings-text-color);
 	margin-top: -50px;
   	font-size: 13px;
 }
@@ -285,7 +286,7 @@ div.map-container{
 	}
 
 	.triangulate-settings a{
-		color: #fff;
+		color: config(--settings-link-color);
 	}
 	
 	.triangulate-settings .language{
@@ -294,7 +295,7 @@ div.map-container{
 	}
 	
 	.triangulate-settings .language label{
-		color: #888;
+		color: config(--settings-text-color);
 		font-weight: normal;
 		font-size: 13px;
 		margin-right: 5px;
@@ -316,10 +317,11 @@ div.map-container{
 	.triangulate-settings ul.select-language li{
 		display: inline-block;
 		margin: 0 0 0 5px;
+		color: config(--settings-text-color);
 	}
 
 	.triangulate-settings ul.select-language li.active a{
-     	background-color: #888; 
+     	background-color: config(--settings-active-background-color); 
     }
 
 	.triangulate-settings ul.select-language li a{

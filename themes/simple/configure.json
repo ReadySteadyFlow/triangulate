@@ -55,6 +55,13 @@
 				"selected":		"#f0f0f0"
 			},
 			{
+				"name": 		"Border Color",
+				"replace": 		"config(--nav-border-color)",
+				"control":		"color",
+				"default":		"#ddd",
+				"selected":		"#ddd"
+			},
+			{
 				"name": 		"Text Color",
 				"replace": 		"config(--nav-text-color)",
 				"control":		"color",
@@ -100,6 +107,39 @@
 				"control":		"color",
 				"default":		"#428bca",
 				"selected":		"#428bca"
+			}
+		]
+	},
+	{
+		"name": 			"Settings",
+		"controls":	[
+			{
+				"name": 		"Background Color",
+				"replace": 		"config(--settings-background-color)",
+				"control":		"color",
+				"default":		"#777",
+				"selected":		"#777"
+			},
+			{
+				"name": 		"Text Color",
+				"replace": 		"config(--settings-text-color)",
+				"control":		"color",
+				"default":		"#fff",
+				"selected":		"#fff"
+			},
+			{
+				"name": 		"Link Color",
+				"replace": 		"config(--settings-link-color)",
+				"control":		"color",
+				"default":		"#ffffff",
+				"selected":		"#ffffff"
+			},
+			{
+				"name": 		"Active Background Color",
+				"replace": 		"config(--settings-active-background-color)",
+				"control":		"color",
+				"default":		"#aaa",
+				"selected":		"#aaa"
 			}
 		]
 	},

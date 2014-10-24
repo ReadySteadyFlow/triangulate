@@ -2273,7 +2273,7 @@ angular.module('triangulate.controllers', [])
 		
 		var stamp = moment().format('X');
 			
-		var url = $scope.domain + '/index.html?t='+stamp;
+		var url = $scope.domain + '/?t='+stamp;
 		
 		$scope.currentSite = $sce.trustAsResourceUrl(url);
 	});
@@ -2296,7 +2296,7 @@ angular.module('triangulate.controllers', [])
 			function refresh(){
 				var stamp = moment().format('X');
 					
-				var url = $scope.domain + '/index.html?t='+stamp;
+				var url = $scope.domain + '/?t='+stamp;
 				
 				$scope.currentSite = $sce.trustAsResourceUrl(url);
 			}
