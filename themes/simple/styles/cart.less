@@ -1,8 +1,3 @@
-@cartbg: #f8f8f8;
-@cartbginverse: #f8f8f8;
-@carttext: #555;
-@carttextinverse: #555;
-
 .cart-toggle{
 	float: right;
   	width: 50px;
@@ -21,12 +16,12 @@ body .triangulate-cart{
   	z-index: 100;
   	text-align: left;
   	z-index: 5;
-  	background-color: @cartbg;
-  	color: @carttext;
+  	background-color: config(--cart-background-color);
+  	color: config(--cart-text-color);
   	overflow: hidden;
-  	margin: -10px 10px 20px 10px;
+  	margin: 0 10px 20px 10px;
   	border-radius: 5px;
-  	border: 1px solid #ddd;
+  	border: 1px solid config(--cart-border-color);
   	display: none;
 }
 
@@ -35,14 +30,17 @@ body .triangulate-cart{
 	}
 
 	body .triangulate-cart-header{
-		border-bottom: 2px solid rgba(255,255,255,.2);
+		border-bottom: 2px solid config(--cart-border-color);
 	}
 
 	body .triangulate-cart span, body .triangulate-cart label{
     	font-weight: normal;
       	font-size: 12px;
-      	color: @carttext;
+      	color: config(--cart-text-color);
       	text-align: right;
+        margin: 0;
+    	padding: 5px;
+        line-height: 25px;
     }
 
 	body .triangulate-cart span.item, body .triangulate-cart span.name{
@@ -63,11 +61,12 @@ body .triangulate-cart{
     }
 
 	body .triangulate-cart-container{
-    	background-color: @cartbginverse;
+    	background-color: config(--cart-alternate-background-color);
+    	padding-bottom: 15px;
     }
 
     body .triangulate-cart-container span, body .triangulate-cart-container small, body .triangulate-cart-container label{
-        color: @carttextinverse;
+        color: config(--cart-alternate-text-color);
     }
 
 body .triangulate-cart-container div{
@@ -91,7 +90,7 @@ body .triangulate-cart-container div{
         }
 
     .triangulate-cart-total{
-      	border-top: 1px solid rgba(255,255,255,.2);
+      	border-top: 1px solid config(--cart-border-color);
     }
 
     .triangulate-cart-total span{
@@ -112,11 +111,11 @@ body .triangulate-cart-container div{
       	bottom: 0;
       	left: 0;
       	width: 100%;
-      	background-color: @cartbg;
+      	background-color: config(--cart-background-color);
       	padding: 10px;
       	text-align: right;
-      	border-top: 1px solid rgba(255,255,255,.25);
-		border-bottom: 2px solid rgba(255,255,255,.25);
+      	border-top: 1px solid config(--cart-border-color);
+		border-bottom: 2px solid config(--cart-border-color);
     }
 
 	
@@ -134,7 +133,7 @@ body .triangulate-cart-container div{
   position: relative;
   margin: 0;
   padding: 10px 0 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid config(--cart-border-color);
   display: flex;
 }
 
