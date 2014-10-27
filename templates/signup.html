@@ -37,8 +37,10 @@
 			</div>
 		</div>
 		
-		<!-- paypal (future)  -->
-		<div class="form-group">
+		<!-- paywith -->
+		<div 
+			ng-if="showOptions == true"
+			class="form-group">
 			<label for="domain" class="control-label">{{'Pay With' | i18next}}</label>
 			<div>
 				<select class="form-control"

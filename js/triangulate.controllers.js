@@ -150,6 +150,20 @@ angular.module('triangulate.controllers', [])
 	
 	// setup
 	$scope.setup = Setup;
+	$scope.showOptions = false;
+	
+	// the default is stripe
+	var payWith = 'stripe';
+	
+	// for multiple payment options
+	if($scope.setup.stripePubKey != '' && $scope.setup.paypalEmail != ''){
+		$scope.showOptions = true;
+	}
+	
+	// if stripe is blank, set the default to paypal
+	if($scope.setup.stripePubKey == ''){
+		payWith = 'paypal';	
+	}
 	
 	var plan = $scope.setup.plans[0].id;
 	
@@ -157,7 +171,7 @@ angular.module('triangulate.controllers', [])
 	$scope.temp = {
 		'email': '',
 		'plan': plan,
-		'payWith': 'stripe',
+		'payWith': payWith,
 		'domain': ''
 	}
 	
