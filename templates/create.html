@@ -396,7 +396,7 @@
 								<div class="item" ng-repeat="theme in themes" 
 									data-id="{{theme.id}}"
 									ng-class="{'active': (theme.id == themeId)}">
-										<img ng-src="themes/{{theme.id}}/screenshot.png">
+										<img ng-src="{{setup.themes}}/{{theme.id}}/screenshot.png">
 										<div class="carousel-caption">
 											 <p><b>{{theme.name}}</b>{{theme.desc}}</p>
 										</div>
