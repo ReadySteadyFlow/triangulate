@@ -267,6 +267,7 @@
   "remove_all_pages": "Please remove all pages first.",
   "Remove Page": "Remove Page",
   "Remove Page Type": "Remove Page Type",
+  "replace_content": "Replace content with default theme content. Any changes will be saved in version history.",
   "Republish": "Republish",
   "Required": "Required",
   "Requires Login": "Requires Login",

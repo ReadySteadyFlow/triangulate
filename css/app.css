@@ -238,6 +238,18 @@ body .modal menu{
 	padding: 0 15px !important;
 }
 
+body .modal .check-alert{
+	margin-top: 25px;
+}
+
+body .modal .check-alert label{
+	color: #111;
+}
+
+body .modal .check-alert input{
+	margin-right: 10px;
+} 
+
 body .modal-header{
 	padding-top: 10px;
 	padding-bottom: 10px;	

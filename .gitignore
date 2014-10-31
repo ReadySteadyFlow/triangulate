@@ -6,6 +6,9 @@ info.php
 api/
 api/*
 
+themes/premium
+themes/premium/*
+
 themes/chromatic
 themes/chromatic/*
 

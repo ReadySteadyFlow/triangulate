@@ -79,11 +79,20 @@
 		    <div class="modal-body">
 		    
 		    <p>
-		    	{{'Confirm you want to apply' | i18next}} <strong>{{temp.name}}</strong>
+		    	{{'Confirm you want to apply' | i18next}}: <strong>{{temp.name | toHuman}}</strong>
 		    </p>
 		    
 		    <p>
 		        {{'reset_theme' | i18next}}
+		    </p>
+		    
+		    <p class="check-alert alert alert-warning">
+			    <label>
+			    	<input 
+			    		ng-model="replaceContent"
+			    		type="checkbox">
+			    	{{'replace_content' | i18next}}
+			    </label>
 		    </p>
 		    
 		    </div>

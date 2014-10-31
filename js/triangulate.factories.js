@@ -1744,11 +1744,12 @@ angular.module('triangulate.factories', [])
 	}
 	
 	// applies a theme
-	theme.apply = function(theme, callback){
+	theme.apply = function(theme, replaceContent, callback){
 	
 		// set params
 		var params = {
-			theme: theme
+			theme: theme,
+			replaceContent: replaceContent
 			};
 			
 		// set post to URL Encoded

@@ -2217,6 +2217,7 @@ angular.module('triangulate.controllers', [])
 	
 		// set temporary model
 		$scope.temp = theme;
+		$scope.replaceContent = true;
 	
 		$('#applyDialog').modal('show');
     	
@@ -2224,11 +2225,11 @@ angular.module('triangulate.controllers', [])
 	
 	// applies a new theme
 	$scope.applyTheme = function(theme){
-	
-		 message.showMessage('progress');
+		
+		message.showMessage('progress');
 	
 		// apply the theme
-		Theme.apply(theme.name, 
+		Theme.apply(theme.name, $scope.replaceContent,
 			function(){
 				 message.showMessage('success');
 			});
