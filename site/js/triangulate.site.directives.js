@@ -118,7 +118,7 @@ angular.module('triangulate.site.directives', [])
 })
 
 // add point to map
-.directive('triangulateAddPoint', function(Menu, $state){
+.directive('triangulateAddPoint', function(Menu){
 	
 	return{
 		
@@ -128,7 +128,7 @@ angular.module('triangulate.site.directives', [])
 			var name = attr.name;
 			var location = attr.location;
 			var description = attr.description;
-			var url = $state.href(attr.url);	// conver URL to href
+			var url = attr.url;	// conver URL to href
 			var latLong = attr.latLong;
 			var mapId = attr.mapId;
 			var latitude = null;
@@ -191,7 +191,7 @@ angular.module('triangulate.site.directives', [])
 })
 
 // map
-.directive('triangulateAddEvent', function(Menu, $state){
+.directive('triangulateAddEvent', function(Menu){
 	
 	return{
 		
@@ -201,7 +201,7 @@ angular.module('triangulate.site.directives', [])
 			var name = attr.name;
 			var location = attr.location;
 			var description = attr.description;
-			var url = $state.href(attr.url);	// conver URL to href
+			var url = attr.url;	// conver URL to href
 			var beginDate = attr.beginDate;
 			var endDate = attr.endDate;
 			var calendarId = attr.calendarId;
@@ -530,7 +530,7 @@ angular.module('triangulate.site.directives', [])
 })
 
 // login
-.directive('triangulateLogin', function($rootScope, $window, $state, User){
+.directive('triangulateLogin', function($rootScope, $window, User){
 	
 	return{
 		
