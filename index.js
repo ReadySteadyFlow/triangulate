@@ -96,10 +96,10 @@ app.use('/api/user', user)
 app.get('/', (req, res) => res.send(`<html>
     <head><title>Welcome to Triangulate</title></head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
-    <link type="text/css" href="/resources/start.css" rel="stylesheet">
+    <link type="text/css" href="/resources/css/start.css" rel="stylesheet">
     <body>
         <p><img class="logo" src="/resources/triangulate-logo.svg"></p>
-        <p>Thank you for building your site with Respond!  You can learn more about Triangulate at <a href="https://triangulate.io">triangulate.io</a>.</p>
+        <p>Thank you for building your site with Triangulate!  You can learn more about Triangulate at <a href="https://triangulate.io">triangulate.io</a>.</p>
         <p><a class="setup" href="setup">Setup your site now</a</p>
     </body>
 </html>`))
