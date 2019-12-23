@@ -83,13 +83,13 @@ body header .primary-menu {
 }
 
 body header .primary-menu a {
-    background: url(/resources/respond-logo-standalone-gray.svg) no-repeat 10px 12px;
-    background-size: 15px;
+    background: url(/resources/triangulate-standalone-gray.svg) no-repeat 10px 12px;
+    background-size: 18px;
 }
 
 body header .primary-menu a:hover {
-    background: #fff url(/resources/respond-logo-standalone.svg) no-repeat 10px 12px;
-    background-size: 15px;
+    background: #fff url(/resources/triangulate-standalone.svg) no-repeat 10px 12px;
+    background-size: 18px;
 }
 
 body header .secondary-menu {

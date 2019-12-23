@@ -46,7 +46,7 @@ passport.deserializeUser(function(email, done) {
         done(null, user);
     })
 
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(session({ secret: 'make it so', resave: false, saveUninitialized: false }));
 
 // Initialize Passport and restore authentication state, if any, from the
 // session.
@@ -94,14 +94,14 @@ app.use('/api/form', form)
 app.use('/api/user', user)
 
 app.get('/', (req, res) => res.send(`<html>
-    <head><title>Welcome to Respond</title></head>
+    <head><title>Welcome to Triangulate</title></head>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&display=swap" rel="stylesheet">
     <link type="text/css" href="/resources/start.css" rel="stylesheet">
     <body>
-        <p><img class="logo" src="/resources/respond-logo.svg"></p>
-        <p>Thank you for building your site with Respond!  You can learn more about Respond at <a href="https://respondcms.com">respondcms.com</a>.</p>
+        <p><img class="logo" src="/resources/triangulate-logo.svg"></p>
+        <p>Thank you for building your site with Respond!  You can learn more about Triangulate at <a href="https://triangulate.io">triangulate.io</a>.</p>
         <p><a class="setup" href="setup">Setup your site now</a</p>
     </body>
 </html>`))
 
-app.listen(port, () => console.log(`Respond app listening on port ${port}!`))
+app.listen(port, () => console.log(`Triangulate app listening on port ${port}!`))
