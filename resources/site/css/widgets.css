@@ -454,10 +454,28 @@ body button.purchase-button[payment-buy-now] {
   background-position: center center;
 }
 
+.site-media-element .site-media-image svg {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  fill: #555;
+}
+
 .site-media-element .site-media-body {
   margin: 0;
   padding: 0 0 0 95px;
   vertical-align: top;
+}
+
+.site-media-element .site-media-body h3, .site-media-element .site-media-body h3:hover {
+  margin: 0 0 10px 0;
+  padding: 0;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 1.5em;
+  line-height: 20px;
 }
 
 .site-media-element .site-media-body h4, .site-media-element .site-media-body h4:hover {
