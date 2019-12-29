@@ -19,9 +19,6 @@ const express = require('express'),
 // set app root
 global.appRoot = path.resolve(__dirname)
 
-// publish site json
-common.publishSiteJSON()
-
 // setup passport (see https://github.com/passport/express-4.x-local-example/blob/master/server.js)
 passport.use(new LocalStrategy(
     function(username, password, done) {

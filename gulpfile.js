@@ -1,6 +1,11 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    minifyCss = require('gulp-minify-css')
+    minifyCss = require('gulp-minify-css'),
+    env = require('dotenv').config(),
+    path = require('path'),
+    fs = require('fs'),
+    fse = require('fs-extra')
+
 
 // copy and combine css files
 gulp.task('css-app', function(done) {
@@ -15,7 +20,7 @@ gulp.task('css-app', function(done) {
 
     done()
   
-  });
+  })
 
 
 // copy and combine js files
@@ -30,7 +35,7 @@ gulp.task('js-app', function(done) {
   
     done()
   
-  });
+  })
 
 
 // copy and combine css files
@@ -46,7 +51,7 @@ gulp.task('css-site', function(done) {
 
     done()
   
-  });
+  })
 
 
 // copy and combine js files
@@ -61,10 +66,31 @@ gulp.task('js-site', function(done) {
   
     done()
   
-  });
+  })
+
+// create json file
+gulp.task('json-site', function(done) {
+
+  let site = {},
+      appRoot = path.resolve(__dirname)
+
+  site.id = process.env.SITE_ID
+  site.formSubmitApiUrl = process.env.FORM_SUBMIT_URL
+
+  console.log(site.id)
+
+  // setup directories
+  fse.ensureDirSync(`${appRoot}/site/data/`)
+
+  // save JSON file
+  fs.writeFileSync(`${appRoot}/site/data/site.json`, JSON.stringify(site), 'utf8')
+
+  done()
+
+})
 
 // app
 gulp.task('default', gulp.parallel('css-app', 'js-app'))
 
 // site
-gulp.task('site', gulp.parallel('css-site', 'js-site'))
+gulp.task('site', gulp.parallel('css-site', 'js-site', 'json-site'))
