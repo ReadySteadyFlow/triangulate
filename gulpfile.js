@@ -87,8 +87,13 @@ gulp.task('json-site', function(done) {
 
 })
 
-// app
-gulp.task('default', gulp.parallel('css-app', 'js-app'))
+
+// default -> site
+gulp.task('default', gulp.parallel('css-site', 'js-site', 'json-site'))
 
 // site
 gulp.task('site', gulp.parallel('css-site', 'js-site', 'json-site'))
+
+// app
+gulp.task('app', gulp.parallel('css-app', 'js-app'))
+
