@@ -77,8 +77,6 @@ gulp.task('json-site', function(done) {
   site.id = process.env.SITE_ID
   site.formSubmitApiUrl = process.env.FORM_SUBMIT_URL
 
-  console.log(site.id)
-
   // setup directories
   fse.ensureDirSync(`${appRoot}/site/data/`)
 
