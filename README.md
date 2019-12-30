@@ -9,9 +9,20 @@ Version: 8.0.0 (stable)
 ### Installation
 
 ```
-git clone https://github.com/madoublet/triangulate
-cd triangulate
+# create site directory
+mkdir my-site
+cd my-site
+
+# clone repo
+git clone https://github.com/madoublet/triangulate .
+
+# install dependencies
 npm install
+
+# setup .env
+cp .env.sample .env
+
+# start app
 npm start
 ```
 
@@ -22,6 +33,33 @@ Navigate to https://localhost:3000 and follow the instructions to create your si
 ### Editing your site
 
 Once your site is created, navigate to https://localhost:3000/edit
+
+### Change Settings
+```
+nano .env
+gulp
+```
+
+### Update CSS/JS (after creating your site)
+```
+# switch to css directory
+cd site/css
+
+# edit css
+nano variables.css
+
+# build site.all.css
+gulp
+
+# switch to js directory
+cd site/js
+
+# edit js
+nano widgets.js
+
+# build site.all.js
+gulp
+```
 
 ### Contribute
 
