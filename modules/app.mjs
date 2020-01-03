@@ -20,6 +20,7 @@ import { PageSettingsModal } from '/modules/page-settings.mjs'
 import { EditMenuModal } from '/modules/edit-menu.mjs'
 import { EditMenuItemModal } from '/modules/edit-menu-item.mjs'
 import { EditComponentModal } from '/modules/edit-component.mjs'
+import { RemovePageModal } from '/modules/remove-page.mjs'
 
 // setup app
 let app = {}
@@ -50,7 +51,8 @@ app.setup = function() {
         pageSettingsModal = new PageSettingsModal(),
         editMenuModal = new EditMenuModal(),
         editMenuItemModal = new EditMenuItemModal(),
-        editComponentModal = new EditComponentModal()
+        editComponentModal = new EditComponentModal(),
+        removePageModal = new RemovePageModal()
 }
 
 app.setup();

@@ -129,10 +129,23 @@
 .app-slide-in-modal-list-item .material-icons {
     position: absolute;
     top: 25px;
-    right: 12px;
+    right: 15px;
     color: #2EBF91;
     font-size: 20px;
     opacity: 0;
+}
+
+.app-slide-in-modal-list-item .remove-item.material-icons {
+    position: absolute;
+    top: 25px;
+    right: 45px;
+    color: #aaa;
+    font-size: 20px;
+    opacity: 0;
+}
+
+.app-slide-in-modal-list-item .remove-item.material-icons:hover {
+    color: #CF4647;
 }
 
 .app-slide-in-modal-list-item:hover .material-icons {

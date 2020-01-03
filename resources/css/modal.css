@@ -171,6 +171,11 @@
     text-overflow: ellipsis;
   }
 
+  .app-modal p.long-text {
+      white-space: wrap;
+      overflow: visible;
+  }
+
   .app-modal label {
     margin: 0 25px 5px 0;
     text-align: left;

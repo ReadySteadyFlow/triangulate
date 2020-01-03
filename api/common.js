@@ -1,7 +1,8 @@
 const fs = require('fs'),
       fse = require('fs-extra'),
       handlebars = require('handlebars'),
-      cheerio = require('cheerio')
+      cheerio = require('cheerio'),
+      pretty = require('pretty')
 
 /**
   * Common application functions
@@ -331,6 +332,9 @@ module.exports = {
       
       // save content
       html = $.html()
+
+      // clean html
+      html = pretty(html, {ocd: true})
 
       // get directory
       let dir = page.url.substring(0, page.url.lastIndexOf("/")+1)

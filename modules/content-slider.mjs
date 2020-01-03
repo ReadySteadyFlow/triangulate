@@ -63,14 +63,33 @@ export class ContentSlider {
                 let json = JSON.parse(xhr.responseText)
 
                 json.forEach(i => {
-                    context.pagesList.innerHTML += `<div class="app-slide-in-modal-list-item">
-                    <a href="/edit?page=/${i.url}">
-                        <h3>${i.name}</h3>
-                        <p>${i.url}</p>
-                        <i class="material-icons">arrow_forward</i>
-                    </a>
-                </div>  `
+                    let html = `<div class="app-slide-in-modal-list-item">
+                            <a href="/edit?page=/${i.url}">
+                                <h3>${i.name}</h3>
+                                <p>${i.url}</p>`
+                                
+                    if(i.url != 'index.html')html += `<i data-url="${i.url}" class="remove-item material-icons">remove_circle_outline</i>`
+                    
+                    html += `<i class="material-icons">arrow_forward</i>
+                            </a>
+                        </div> `
+
+                    context.pagesList.innerHTML += html
                 })
+
+                let els = context.pagesList.querySelectorAll('.remove-item')
+
+                for(let x=0; x<els.length; x++) {
+                    els[x].addEventListener('click', function(e) {
+
+                        let url = e.target.getAttribute('data-url')
+
+                        window.dispatchEvent(new CustomEvent('app.removePage', {detail: {url: url}}))
+
+                        e.preventDefault()
+                        return false
+                    })
+                }
             
             }
             else {

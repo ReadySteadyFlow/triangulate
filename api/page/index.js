@@ -456,4 +456,77 @@ router.post('/save', async (req, res) => {
 
 })
 
+/**
+  * /api/page/remove
+  * @param {Object} req - http://expressjs.com/api.html#req
+  * @param {Object} res - http://expressjs.com/api.html#res
+  * @param {Object} next - required for middleware
+  */
+ router.post('/remove', async (req, res) => {
+
+    // auth
+    if(!req.user) {
+        res.status(400).send('Not authenticated')
+        return
+    }
+
+    let user = common.findUser(req.user.email),
+        firstName = "Default",
+        lastName = "User"
+
+    // set first and last name
+    if(user.firstName) firstName = user.firstName
+    if(user.lastName) lastName = user.lastName
+
+    console.log('[debug] user', req.user)
+
+    let body = req.body,
+        url = body.url
+
+    // clear leading slash
+    if (url.charAt(0) == "/") url = url.substr(1)
+
+    // remove file extension
+    if(url.indexOf('.htm') != -1) url = url.split('.').slice(0, -1).join('.')
+    
+    // add html extension
+    url = url += '.html'
+
+    console.log('[debug] remove', req.body)
+
+    try {
+    
+        // get json
+        let json = fs.readFileSync(`${global.appRoot}/site/data/pages.json`, 'utf8')
+
+        // read json
+        let pages = JSON.parse(json)
+
+        // remove page
+        for(let x=0; x<pages.length; x++) {
+            if(pages[x].url == url) {
+                pages.splice(x, 1);
+            }
+        }
+
+        console.log('[debug] removing', `${global.appRoot}/site/${url}`)
+
+        // remove file
+        fs.unlinkSync(`${global.appRoot}/site/${url}`)
+
+         // save json file
+        fs.writeFileSync(`${global.appRoot}/site/data/pages.json`, JSON.stringify(pages), 'utf8')
+        
+        // send 200       
+        res.setHeader('Content-Type', 'application/json')
+        res.status(200).send('Ok')
+
+    }
+    catch(e) {
+        console.log(e)
+        res.status(400).send('There was an error saving the page')
+    }
+
+})
+
 module.exports = router
