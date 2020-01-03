@@ -2,7 +2,8 @@ const fs = require('fs'),
       fse = require('fs-extra'),
       handlebars = require('handlebars'),
       cheerio = require('cheerio'),
-      pretty = require('pretty')
+      pretty = require('pretty'),
+      sm = require('sitemap')
 
 /**
   * Common application functions
@@ -175,8 +176,35 @@ module.exports = {
     },
 
     /**
+     * Generates a sitemap
+     */
+    generateSiteMap: function() {
+
+      // create sitemap (get sitemap)
+      let sitemap = sm.createSitemap ({
+        hostname: process.env.SITE_URL,
+        cacheTime: 600000
+      })
+
+      // get json
+      let json = fs.readFileSync(`${global.appRoot}/site/data/pages.json`, 'utf8')
+
+      // read json
+      let pages = JSON.parse(json)
+
+      // add pages to sitemap
+      pages.forEach(page => {
+        sitemap.add({url: page.url})
+      })
+
+      // save html file
+      fs.writeFileSync(`${global.appRoot}/site/sitemap.xml`, sitemap.toString(), 'utf8')
+
+    },
+
+    /**
      * Publishes a page
-     * @param {String} email
+     * @param {String} page
      */
     publishPage: function(page) {
 

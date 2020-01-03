@@ -35,6 +35,9 @@ router.post('/save', async (req, res) => {
             common.publishPage(page)
         });
         
+        // generate sitemap
+        common.generateSiteMap()
+
         // send 200       
         res.status(200).send('Page saved successfully')
 

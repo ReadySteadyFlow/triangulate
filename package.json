@@ -24,6 +24,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pretty": "^2.0.0",
+    "sitemap": "^5.1.0",
     "uglifycss": "0.0.29"
   },
   "devDependencies": {

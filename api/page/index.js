@@ -48,6 +48,9 @@ router.post('/save', async (req, res) => {
         // publish page
         if(page != null) {
             common.publishPage(page)
+
+            // generate sitemap
+            common.generateSiteMap()
         }
         
         // send 200       
@@ -358,6 +361,9 @@ router.post('/save', async (req, res) => {
 
         // publish page
         common.publishPage(settings)
+
+        // generate sitemap
+        common.generateSiteMap()
         
         // send 200       
         res.setHeader('Content-Type', 'application/json')
@@ -439,6 +445,9 @@ router.post('/save', async (req, res) => {
 
                 // republish
                 common.publishPage(settings)
+
+                // generate sitemap
+                common.generateSiteMap()
 
                 // send 200       
                 res.setHeader('Content-Type', 'application/json')
