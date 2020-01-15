@@ -1,3 +1,5 @@
+import { Upload } from '/modules/upload.mjs'
+
 /*
  * Models the select file modal
  */
