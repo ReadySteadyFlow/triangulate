@@ -1,0 +1,20 @@
+{
+  "hosting": {
+    "public": "site",
+    "rewrites": [
+      {
+        "source": "**/**",
+        "function": "triangulate"
+//      },
+//      {
+//        "source": "/setup",
+//        "function": "triangulate"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
